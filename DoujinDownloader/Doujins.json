@@ -1,0 +1,14 @@
+{
+  "Doujins": [{
+    "Artist": "Artist Name’",
+    "Subsection": "Subsection can be null",
+    "Language": "Language can be null",
+    "Name": "Doujin name",
+    "Uri": "Doujin uri can be null (but be sure to set IsDownloaded to true)",
+    "IsDownloaded": true
+  }, {
+    "Artist": "Artist Name’",
+    "Name": "Doujin name",
+    "IsDownloaded": true
+  }]
+}
