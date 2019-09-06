@@ -21,7 +21,7 @@ namespace DoujinDownloader
         /// <returns><see cref="Doujins"/> object with <see cref="Doujin"/> collection.</returns>
         internal static async ValueTask<Doujins> ParseMarkdownAsync(string markdownFilePath, string artistToDownload = "")
         {
-            IReadOnlyCollection<string> markdownLines =
+            IEnumerable<string> markdownLines =
                 await File.ReadAllLinesAsync(markdownFilePath, Encoding.UTF8).ConfigureAwait(false);
             string artist = string.Empty;
             string subsection = string.Empty;
@@ -37,7 +37,7 @@ namespace DoujinDownloader
                 //if artist name line
                 if (markdownLine.StartsWith(Enums.MarkdownParser.ArtistPattern, StringComparison.Ordinal))
                 {
-                    artist = ParseArtistLine(markdownLine);
+                    artist = await ParseArtistLineAsync(markdownLine).ConfigureAwait(false);
 
                     //if new artist = mark subsection empty
                     subsection = string.Empty;
@@ -69,7 +69,7 @@ namespace DoujinDownloader
                 string language;
                 bool isDownloaded;
 
-                (name, uri, language, isDownloaded) = ParseDoujinLine(markdownLine.Trim());
+                (name, uri, language, isDownloaded) = await Task.Run(() => ParseDoujinLine(markdownLine.Trim())).ConfigureAwait(false);
 
                 doujins.DoujinsList.Add(new Doujin(artist, subsection, language, name, uri, isDownloaded));
             }
@@ -82,14 +82,14 @@ namespace DoujinDownloader
         /// </summary>
         /// <param name="markdownLine">Artist line in .md file.</param>
         /// <returns>Artist name string.</returns>
-        private static string ParseArtistLine(string markdownLine)
+        private static async ValueTask<string> ParseArtistLineAsync(string markdownLine) => await Task.Run(() =>
         {
             Match match = Regex.Match(markdownLine, Enums.MarkdownParser.ArtistNamePattern);
 
             if (match.Success) return match.Groups["name"].Value;
 
             throw new Exception($"Can't parse {nameof(markdownLine)}:{markdownLine}");
-        }
+        }).ConfigureAwait(false);
 
         /// <summary>
         /// Parse doujin line from .md file.
