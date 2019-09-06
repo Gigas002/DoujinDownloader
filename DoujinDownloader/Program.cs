@@ -8,7 +8,7 @@ using CommandLine;
 using Newtonsoft.Json;
 using DoujinDownloader.Enums;
 
-//TODO: Localization
+//TODO: Localization, Publish profiles
 
 namespace DoujinDownloader
 {

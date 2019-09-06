@@ -4,7 +4,9 @@ Simple app on **.NET Core 3.0 (preview9)** to create and support your local douj
 
 Now only creates file with `uri` list, that you can use with, for example, [HitomiDownloader](https://github.com/KurtBestor/Hitomi-Downloader-issues).
 
-*todo icon*
+![Icon](DoujinDownloader/Resources/icon.png)
+
+Icon is made by [Freepik](https://www.flaticon.com/authors/freepik) from [FlatIcon](https://www.flaticon.com/).
 
 *todo appveyor badge*
 
