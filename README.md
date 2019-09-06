@@ -34,7 +34,7 @@ Previous versions can be found on [releases](https://github.com/Gigas002/DoujinD
 
 `-j/--json` is a `string` with path to converted `.json` file with doujins list. If not set – created near `.exe`.
 
-`-a/--artist` is a **Artist’s name** `string` to get from input file. If not set – gets all artist. 
+`-a/--artist` is a **Artist’s name** `string` to get from input file. If not set – gets all artist.
 
 `-u/--uris` is a `string` with path to readu `.txt` file with doujins uris. If not set – created near `.exe`.
 

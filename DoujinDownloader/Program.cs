@@ -15,7 +15,7 @@ namespace DoujinDownloader
         #region Properties
 
         /// <summary>
-        /// Md file with doujin list.
+        /// .md or .json file with doujin list.
         /// </summary>
         private static FileInfo InputFileInfo { get; set; }
 
@@ -25,12 +25,12 @@ namespace DoujinDownloader
         private static string ArtistName { get; set; }
 
         /// <summary>
-        /// Converted json.
+        /// Converted .json (if input was .md).
         /// </summary>
         private static FileInfo JsonFileInfo { get; set; }
 
         /// <summary>
-        /// .txt file with raw uris, to use in HitomiDownloader.
+        /// .txt file with raw uris, to use in (for example) HitomiDownloader.
         /// </summary>
         private static FileInfo UrisFileInfo { get; set; }
 
@@ -43,7 +43,7 @@ namespace DoujinDownloader
 
         internal static async Task Main(string[] args)
         {
-            Stopwatch stopwatch = Stopwatch.StartNew();
+            Stopwatch stopwatch = new Stopwatch();
 
             //Get command line args.
             Parser.Default.ParseArguments<Options>(args).WithParsed(ParseConsoleOptions)
@@ -51,6 +51,8 @@ namespace DoujinDownloader
 
             //Stop executing if errors occured.
             if (IsParsingErrors) return;
+
+            stopwatch.Start();
 
             Doujins doujins = new Doujins();
 
@@ -110,9 +112,9 @@ namespace DoujinDownloader
         #region Methods
 
         /// <summary>
-        /// Set properties values from command options.
+        /// Set properties values from command line options.
         /// </summary>
-        /// <param name="options">Console options.</param>
+        /// <param name="options">Command line options.</param>
         private static void ParseConsoleOptions(Options options)
         {
             //Check if string options are empty strings.
@@ -249,6 +251,7 @@ namespace DoujinDownloader
         /// <param name="doujins">Object with <see cref="Doujin"/> list.</param>
         /// <returns>List of <see cref="Doujin"/> objects.</returns>
         private static IEnumerable<Doujin> GetDoujinsToDownload(Doujins doujins) =>
+            //TODO: test AsParallel and IAsyncEnumerable
             doujins.DoujinsList.Where(doujin => doujin.Uri != null && !doujin.IsDownloaded);
 
         #endregion
