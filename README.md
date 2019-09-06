@@ -8,9 +8,9 @@ Now only creates file with `uri` list, that you can use with, for example, [Hito
 
 Icon is made by [Freepik](https://www.flaticon.com/authors/freepik) from [FlatIcon](https://www.flaticon.com/).
 
-*todo appveyor badge*
+[![Build status](https://ci.appveyor.com/api/projects/status/8c8nxdm8sniqkxeq?svg=true)](https://ci.appveyor.com/project/Gigas002/doujindownloader)
 
-## Current version
+##  Current version
 
 Current stable can be found here: [![Release](https://img.shields.io/github/release/Gigas002/DoujinDownloader.svg)](https://github.com/Gigas002/DoujinDownloader/releases/latest).
 
