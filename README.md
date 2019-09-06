@@ -61,6 +61,12 @@ Uri, language and subsection are optional and can be null.
 
 [Example of `.json` file](https://github.com/Gigas002/DoujinDownloader/blob/master/Doujins.json)
 
+## Localization
+
+Localizable strings are located in `Localization/Strings.resx` file. You can add your translation (e.g. added `Strings.Ru.resx` file) and create pull request.
+
+Currently, application is available on **English** and **Russian** languages.
+
 ## Contributing
 
 Feel free to contribute, make forks, change some code, add [issues](https://github.com/Gigas002/DoujinDownloader/issues), etc.

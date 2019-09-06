@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 using CommandLine;
 using Newtonsoft.Json;
 using DoujinDownloader.Enums;
-
-//TODO: Localization, Publish profiles
+using DoujinDownloader.Localization;
 
 namespace DoujinDownloader
 {
@@ -70,9 +69,7 @@ namespace DoujinDownloader
 
             //After work is done.
             stopwatch.Stop();
-            Console.WriteLine($"Done in hours:{stopwatch.Elapsed.Hours}, " +
-                              $"minutes:{stopwatch.Elapsed.Minutes}, seconds:{stopwatch.Elapsed.Seconds}, " +
-                              $"milliseconds:{stopwatch.Elapsed.Milliseconds}.");
+            Console.WriteLine(Strings.Done, stopwatch.Elapsed.Hours, stopwatch.Elapsed.Minutes, stopwatch.Elapsed.Seconds, stopwatch.Elapsed.Milliseconds);
         }
 
         #region Methods
@@ -101,7 +98,7 @@ namespace DoujinDownloader
                 //If no doujins in .md file.
                 if (!doujins.DoujinsList.Any())
                 {
-                    Console.WriteLine($"No doujins selected in {Extensions.MarkdownExtension} file.");
+                    Console.WriteLine(Strings.NoDoujinsInInput, Extensions.MarkdownExtension);
 
                     return;
                 }
@@ -132,7 +129,7 @@ namespace DoujinDownloader
             //Check if string options are empty strings.
             if (string.IsNullOrWhiteSpace(options.InputFilePath))
             {
-                Console.WriteLine("Option -i/--input is not set.");
+                Console.WriteLine(Strings.InputNotSet);
                 IsParsingErrors = true;
 
                 return;
@@ -146,7 +143,7 @@ namespace DoujinDownloader
 
             if (JsonFileInfo.Extension != Extensions.JsonExtension)
             {
-                Console.WriteLine($"-j/--json file extensions is not {Extensions.JsonExtension}");
+                Console.WriteLine(Strings.JsonWrongExtension, Extensions.JsonExtension);
                 IsParsingErrors = true;
 
                 return;
@@ -154,7 +151,7 @@ namespace DoujinDownloader
 
             if (UrisFileInfo.Extension != Extensions.TxtExtension)
             {
-                Console.WriteLine($"-u/--uris file extensions is not {Extensions.TxtExtension}");
+                Console.WriteLine(Strings.UrisWrongExtension, Extensions.TxtExtension);
                 IsParsingErrors = true;
 
                 return;
@@ -164,7 +161,7 @@ namespace DoujinDownloader
                 InputFileInfo.Extension == Extensions.MarkdownExtension)
                 return;
 
-            Console.WriteLine($"-i/--input file extensions is not {Extensions.JsonExtension}/{Extensions.MarkdownExtension}");
+            Console.WriteLine(Strings.InputWrongExtension, Extensions.JsonExtension, Extensions.MarkdownExtension);
             IsParsingErrors = true;
         }
 
@@ -189,8 +186,8 @@ namespace DoujinDownloader
         /// <param name="doujins">Object with <see cref="Doujin"/> list.</param>
         private static async ValueTask PrintCountAsync(Doujins doujins) => await Task.Run(() =>
         {
-            Console.WriteLine($"Doujins count:{doujins.DoujinsList.Count}");
-            Console.WriteLine($"Doujins to download count:{GetDoujinsToDownload(doujins).Count()}");
+            Console.WriteLine(Strings.DoujinsCount, doujins.DoujinsList.Count);
+            Console.WriteLine(Strings.DoujinsToDownloadCount, GetDoujinsToDownload(doujins).Count());
         }).ConfigureAwait(false);
 
         /// <summary>

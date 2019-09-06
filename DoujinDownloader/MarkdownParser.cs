@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DoujinDownloader.Localization;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -88,7 +89,7 @@ namespace DoujinDownloader
 
             if (match.Success) return match.Groups["name"].Value;
 
-            throw new Exception($"Can't parse {nameof(markdownLine)}:{markdownLine}");
+            throw new Exception(string.Format(Strings.CantParse, nameof(markdownLine), markdownLine));
         }).ConfigureAwait(false);
 
         /// <summary>
@@ -105,7 +106,7 @@ namespace DoujinDownloader
 
             Match match = Regex.Match(name, Enums.MarkdownParser.DoujinNamePattern);
 
-            if (!match.Success) throw new Exception($"Can't parse {nameof(markdownLine)}:{markdownLine}");
+            if (!match.Success) throw new Exception(string.Format(Strings.CantParse, nameof(markdownLine), markdownLine));
 
             name = match.Groups[nameof(name)].Value;
             string link = match.Groups[nameof(link)].Value;
