@@ -76,7 +76,7 @@ namespace DoujinDownloader
             //Else if this is .md file => parse it to Doujins object and write to .json file.
             else if (InputFileInfo.Extension == Extensions.MarkdownExtension)
             {
-                doujins = await MarkdownParser.ParseMarkdown(InputFileInfo.FullName, ArtistName).ConfigureAwait(false);
+                doujins = await MarkdownParser.ParseMarkdownAsync(InputFileInfo.FullName, ArtistName).ConfigureAwait(false);
 
                 //If no doujins in .md file.
                 if (!doujins.DoujinsList.Any())
@@ -97,7 +97,7 @@ namespace DoujinDownloader
             await Task.Run(() => TestDoujinsNames(doujins, Paths.DoujinsDirectoryPath)).ConfigureAwait(false);
 
             //Write uris to use in HitomiDownloader (for example).
-            await Task.Run(() => WriteUris(doujins, $"{UrisFileInfo.FullName}")).ConfigureAwait(false);
+            await Task.Run(() => WriteUrisAsync(doujins, $"{UrisFileInfo.FullName}")).ConfigureAwait(false);
 
             //TODO
             //Download doujin.
@@ -217,7 +217,7 @@ namespace DoujinDownloader
         /// </summary>
         /// <param name="doujins">Object with <see cref="Doujin"/> list.</param>
         /// <param name="urisTxtPath">Full path to uris.txt file..</param>
-        private static async ValueTask WriteUris(Doujins doujins, string urisTxtPath)
+        private static async ValueTask WriteUrisAsync(Doujins doujins, string urisTxtPath)
         {
             List<Doujin> doujinsList = GetDoujinsToDownload(doujins).ToList();
 

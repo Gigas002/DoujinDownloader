@@ -19,7 +19,7 @@ namespace DoujinDownloader
         /// <param name="markdownFilePath">Full path to .md file.</param>
         /// <param name="artistToDownload">Optional. Name of artist to download.</param>
         /// <returns><see cref="Doujins"/> object with <see cref="Doujin"/> collection.</returns>
-        internal static async ValueTask<Doujins> ParseMarkdown(string markdownFilePath, string artistToDownload = "")
+        internal static async ValueTask<Doujins> ParseMarkdownAsync(string markdownFilePath, string artistToDownload = "")
         {
             IReadOnlyCollection<string> markdownLines =
                 await File.ReadAllLinesAsync(markdownFilePath, Encoding.UTF8).ConfigureAwait(false);
