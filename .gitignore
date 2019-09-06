@@ -13,6 +13,7 @@
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 launchSettings.json
+*.publish
 
 # Build results
 [Dd]ebug/
