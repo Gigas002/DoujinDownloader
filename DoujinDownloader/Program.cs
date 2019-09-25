@@ -9,6 +9,8 @@ using Newtonsoft.Json;
 using DoujinDownloader.Enums;
 using DoujinDownloader.Localization;
 
+//TODO: Use System.Text.Json instead of Newtonsoft.Json
+
 namespace DoujinDownloader
 {
     internal static class Program
