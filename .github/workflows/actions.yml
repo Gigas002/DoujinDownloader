@@ -12,7 +12,5 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Run a one-line script
-      run: echo Hello, world!
     - name: Build
-      run: dotnet build
+      run: dotnet build -c Release /p:Platform=x64
