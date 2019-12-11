@@ -1,6 +1,6 @@
 # DoujinDownloader
 
-Simple app on **.NET Core 3.0** to create and support your local doujins repo. You can build project in **VS2019** (**16.3.0**+) or in **VSCode** (**1.38.1**+) with [omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) extension (**1.21.3**+).
+Simple app on **.NET Core 3.1** to create and support your local doujins repo. You can build project in **VS2019** (**16.4.1**+) or in **VSCode** (**1.40.2**+) with [omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) extension (**1.21.3*8+).
 
 Now only creates file with `uri` list, that you can use with, for example, [HitomiDownloader](https://github.com/KurtBestor/Hitomi-Downloader-issues).
 
@@ -20,7 +20,7 @@ Previous versions can be found on [releases](https://github.com/Gigas002/DoujinD
 
 ## Dependencies
 
-- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json) – 12.0.2;
+- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json) – 12.0.3;
 - [CommandLineParser](https://www.nuget.org/packages/CommandLineParser/) – 2.6.0;
 
 ## Input parameters
