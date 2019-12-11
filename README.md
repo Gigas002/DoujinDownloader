@@ -8,7 +8,7 @@ Now only creates file with `uri` list, that you can use with, for example, [Hito
 
 Icon is made by [Freepik](https://www.flaticon.com/authors/freepik) from [FlatIcon](https://www.flaticon.com/).
 
-[![Build status](https://ci.appveyor.com/api/projects/status/8c8nxdm8sniqkxeq?svg=true)](https://ci.appveyor.com/project/Gigas002/doujindownloader) [![Actions Status](https://github.com/Gigas002/DoujinDownloader/workflows/CI/badge.svg)](https://github.com/Gigas002/DoujinDownloader/actions)
+[![Build status](https://ci.appveyor.com/api/projects/status/8c8nxdm8sniqkxeq?svg=true)](https://ci.appveyor.com/project/Gigas002/doujindownloader) [![Actions Status](https://github.com/Gigas002/DoujinDownloader/workflows/.NET%20Core/badge.svg)](https://github.com/Gigas002/DoujinDownloader/actions)
 
 ##  Current version
 
