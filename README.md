@@ -20,7 +20,6 @@ Previous versions can be found on [releases](https://github.com/Gigas002/DoujinD
 
 ## Dependencies
 
-- [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json) – 12.0.3;
 - [CommandLineParser](https://www.nuget.org/packages/CommandLineParser/) – 2.7.82;
 
 ## Input parameters
@@ -47,8 +46,8 @@ Simple example looks like this: `DoujinDownloader -i Doujins.md -j Doujins.json 
 ## How to use md
 
 ```text
-## Author name
-### Subsection (tankoubon, etc)
+## [Author name](uri)
+### Subsection //tankoubon, etc -- optional
 - [ ] [Doujin name](uri), Language //Not Downloaded
 - [x] [Doujin name]() //Downloaded
 ```

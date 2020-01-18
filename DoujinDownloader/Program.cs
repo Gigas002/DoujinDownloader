@@ -5,11 +5,9 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CommandLine;
-using Newtonsoft.Json;
+using System.Text.Json;
 using DoujinDownloader.Enums;
 using DoujinDownloader.Localization;
-
-//TODO: Use System.Text.Json instead of Newtonsoft.Json
 
 namespace DoujinDownloader
 {
@@ -87,8 +85,9 @@ namespace DoujinDownloader
             //If input file extensions .json => deserialize it to Doujins object.
             if (InputFileInfo.Extension == Extensions.JsonExtension)
             {
-                doujins = JsonConvert.DeserializeObject<Doujins>(await File.ReadAllTextAsync(InputFileInfo.FullName)
-                                                                           .ConfigureAwait(false));
+                byte[] bytes = await File.ReadAllBytesAsync(InputFileInfo.FullName).ConfigureAwait(false);
+                doujins = JsonSerializer.Deserialize<Doujins>(GetReadOnlySpan(bytes));
+
                 JsonFileInfo = InputFileInfo;
             }
             //Else if this is .md file => parse it to Doujins object and write to .json file.
@@ -122,6 +121,14 @@ namespace DoujinDownloader
             //Download doujin.
         }
 
+        /// <summary>
+        /// Create <see cref="ReadOnlySpan{T}"/> from byte array.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="t">Array.</param>
+        /// <returns></returns>
+        private static ReadOnlySpan<T> GetReadOnlySpan<T>(T[] t) => new ReadOnlySpan<T>(t);
+        
         /// <summary>
         /// Set properties values from command line options.
         /// </summary>
@@ -175,9 +182,8 @@ namespace DoujinDownloader
         {
             JsonFileInfo.Directory?.Create();
 
-            await using StreamWriter streamWriter = JsonFileInfo.CreateText();
-            JsonSerializer jsonSerializer = new JsonSerializer();
-            jsonSerializer.Serialize(streamWriter, doujins);
+            await using FileStream fileStream = JsonFileInfo.OpenWrite();
+            await JsonSerializer.SerializeAsync(fileStream, doujins).ConfigureAwait(false);
 
             JsonFileInfo.Refresh();
         }).ConfigureAwait(false);

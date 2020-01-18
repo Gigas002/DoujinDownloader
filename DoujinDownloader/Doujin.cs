@@ -1,12 +1,12 @@
 ﻿using System;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace DoujinDownloader
 {
     /// <summary>
     /// Represents doujin object.
     /// </summary>
-    internal sealed class Doujin
+    public sealed class Doujin
     {
         /// <summary>
         /// Constructor to create doujin object.
@@ -28,44 +28,39 @@ namespace DoujinDownloader
         }
 
         /// <summary>
-        /// Constructor to create empty doujin object.
-        /// </summary>
-        internal Doujin() { }
-
-        /// <summary>
         /// Artist name or nickname.
         /// </summary>
-        [JsonProperty(nameof(Artist))]
-        internal string Artist { get; set; } = string.Empty;
+        [JsonPropertyName(nameof(Artist))]
+        public string Artist { get; }
 
         /// <summary>
         /// Subsection.
         /// </summary>
-        [JsonProperty(nameof(Subsection), NullValueHandling = NullValueHandling.Ignore)]
-        internal string Subsection { get; set; } = string.Empty;
+        [JsonPropertyName(nameof(Subsection))]
+        public string Subsection { get; }
 
         /// <summary>
         /// Language.
         /// </summary>
-        [JsonProperty(nameof(Language), NullValueHandling = NullValueHandling.Ignore)]
-        internal string Language { get; set; } = string.Empty;
+        [JsonPropertyName(nameof(Language))]
+        public string Language { get; }
 
         /// <summary>
         /// Doujin name.
         /// </summary>
-        [JsonProperty(nameof(Name))]
-        internal string Name { get; set; } = string.Empty;
+        [JsonPropertyName(nameof(Name))]
+        public string Name { get; }
 
         /// <summary>
         /// Doujin uri.
         /// </summary>
-        [JsonProperty(nameof(Uri), NullValueHandling = NullValueHandling.Ignore)]
-        internal Uri Uri { get; set; }
+        [JsonPropertyName(nameof(Uri))]
+        public Uri Uri { get; }
 
         /// <summary>
         /// Is doujin already downloaded?
         /// </summary>
-        [JsonProperty(nameof(IsDownloaded))]
-        internal bool IsDownloaded { get; set; } = true;
+        [JsonPropertyName(nameof(IsDownloaded))]
+        public bool IsDownloaded { get; }
     }
 }
