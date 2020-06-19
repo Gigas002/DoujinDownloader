@@ -32,11 +32,11 @@ namespace DoujinDownloader
             foreach (string markdownLine in markdownLines
                                            .Where(markdownLine => !string.IsNullOrWhiteSpace(markdownLine))
                                            .Where(markdownLine =>
-                                                      !markdownLine.StartsWith(Enums.MarkdownParser.HeaderPattern,
+                                                      !markdownLine.StartsWith(Constants.MarkdownParser.HeaderPattern,
                                                                                StringComparison.Ordinal)))
             {
                 //if artist name line
-                if (markdownLine.StartsWith(Enums.MarkdownParser.ArtistPattern, StringComparison.Ordinal))
+                if (markdownLine.StartsWith(Constants.MarkdownParser.ArtistPattern, StringComparison.Ordinal))
                 {
                     artist = await ParseArtistLineAsync(markdownLine).ConfigureAwait(false);
 
@@ -52,7 +52,7 @@ namespace DoujinDownloader
                         continue;
 
                 //if subsection line
-                if (markdownLine.StartsWith(Enums.MarkdownParser.SubsectionPattern, StringComparison.Ordinal))
+                if (markdownLine.StartsWith(Constants.MarkdownParser.SubsectionPattern, StringComparison.Ordinal))
                 {
                     subsection = markdownLine.Remove(0, 4).Trim();
 
@@ -60,8 +60,8 @@ namespace DoujinDownloader
                 }
 
                 //Skip additional lines just in case
-                if (!markdownLine.StartsWith(Enums.MarkdownParser.CheckBoxUnchecked, StringComparison.Ordinal) &&
-                    !markdownLine.StartsWith(Enums.MarkdownParser.CheckBoxChecked, StringComparison.Ordinal))
+                if (!markdownLine.StartsWith(Constants.MarkdownParser.CheckBoxUnchecked, StringComparison.Ordinal) &&
+                    !markdownLine.StartsWith(Constants.MarkdownParser.CheckBoxChecked, StringComparison.Ordinal))
                     continue;
 
                 //Get doujin name and stuff
@@ -85,7 +85,7 @@ namespace DoujinDownloader
         /// <returns>Artist name string.</returns>
         private static async ValueTask<string> ParseArtistLineAsync(string markdownLine) => await Task.Run(() =>
         {
-            Match match = Regex.Match(markdownLine, Enums.MarkdownParser.ArtistNamePattern);
+            Match match = Regex.Match(markdownLine, Constants.MarkdownParser.ArtistNamePattern);
 
             if (match.Success) return match.Groups["name"].Value;
 
@@ -104,7 +104,7 @@ namespace DoujinDownloader
             //Remove "- [ ] "/"- [x] "
             string name = markdownLine.Remove(0, 6).Trim();
 
-            Match match = Regex.Match(name, Enums.MarkdownParser.DoujinNamePattern);
+            Match match = Regex.Match(name, Constants.MarkdownParser.DoujinNamePattern);
 
             if (!match.Success) throw new Exception(string.Format(Strings.CantParse, nameof(markdownLine), markdownLine));
 
@@ -122,6 +122,6 @@ namespace DoujinDownloader
         /// <param name="markdownLine">Doujin line in .md file.</param>
         /// <returns><see langword="true"/> if doujin already downloaded, <see langword="false"/> otherwise.</returns>
         private static bool IsDownloadedDoujin(string markdownLine) =>
-            markdownLine.StartsWith(Enums.MarkdownParser.CheckBoxChecked, StringComparison.Ordinal);
+            markdownLine.StartsWith(Constants.MarkdownParser.CheckBoxChecked, StringComparison.Ordinal);
     }
 }

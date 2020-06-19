@@ -1,4 +1,4 @@
-﻿namespace DoujinDownloader.Enums
+﻿namespace DoujinDownloader.Constants
 {
     /// <summary>
     /// Consts related to downloaders

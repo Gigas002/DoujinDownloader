@@ -1,4 +1,4 @@
-﻿namespace DoujinDownloader.Enums
+﻿namespace DoujinDownloader.Constants
 {
     /// <summary>
     /// Some FileInfo.Extensions.
@@ -8,17 +8,17 @@
         /// <summary>
         /// .json
         /// </summary>
-        internal static string JsonExtension { get; } = ".json";
+        internal const string JsonExtension = ".json";
 
         /// <summary>
         /// .md
         /// </summary>
-        internal static string MarkdownExtension { get; } = ".md";
+        internal const string MarkdownExtension = ".md";
 
         /// <summary>
         /// .txt
         /// </summary>
-        internal static string TxtExtension { get; } = ".txt";
+        internal const string TxtExtension = ".txt";
 
         /// <summary>
         /// .html

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommandLine;
 using System.Text.Json;
-using DoujinDownloader.Enums;
+using DoujinDownloader.Constants;
 using DoujinDownloader.Localization;
 
 namespace DoujinDownloader
