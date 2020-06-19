@@ -1,6 +1,6 @@
 # DoujinDownloader
 
-Simple app on **.NET Core 3.1** to create and support your local doujins repo. You can build project in **VS2019** (**16.6.2**+) or in **VSCode** (**1.46.1**+) with [omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) extension (**1.22.1+**).
+Simple app on **.NET Core 3.1** to create and support your local doujins repo.
 
 Now only creates file with `uri` list, that you can use with, for example, [HitomiDownloader](https://github.com/KurtBestor/Hitomi-Downloader-issues).
 
@@ -14,9 +14,21 @@ Icon is made by [Freepik](https://www.flaticon.com/authors/freepik) from [FlatIc
 
 Current stable can be found here: [![Release](https://img.shields.io/github/release/Gigas002/DoujinDownloader.svg)](https://github.com/Gigas002/DoujinDownloader/releases/latest).
 
+For latest build from master you can use [docker image from github](https://github.com/Gigas002/DoujinDownloader/packages/277538).
+
 Information about changes since previous releases can be found in [changelog](https://github.com/Gigas002/DoujinDownloader/blob/master/CHANGELOG.md). This project supports [SemVer 2.0.0](https://semver.org/) (template is `{MAJOR}.{MINOR}.{PATCH}.{BUILD}`).
 
 Previous versions can be found on [releases](https://github.com/Gigas002/DoujinDownloader/releases) and [branches](https://github.com/Gigas002/DoujinDownloader/branches) pages.
+
+## Build
+
+Solution can be build in **VS2019 (16.6.2+)**. You can also build projects in **VSCode (1.46.1+)** with **[omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) (1.22.1+)** extensions. Projects targets **.NET Core 3.1**, so you’ll need **.NET Core 3.1.301 SDK**.
+
+**Release** binaries are made by `publish.ps1` script. Take a look at it in the repo. Note, that running this script requires installed **PowerShell** or **[PowerShell Core](https://github.com/PowerShell/PowerShell)** for **Linux**/**OSX** systems.
+
+## Docker Image
+
+You can build docker image by running `docker.ps1` script with your **PowerShell**/**PowerShell Core (on Linux)**. It’ll create `doujindownloader` image.
 
 ## Dependencies
 

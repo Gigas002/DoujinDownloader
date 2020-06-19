@@ -5,6 +5,8 @@
 - Rebuild with **.NET Core 3.1.301**;
 - Update **CommandLineParser** package to **2.8.0**;
 - Moved to **DBAD** license;
+- Create **Docker image**;
+- *wip feature* Doujins from **hitmoi.la** now downloads as they should;
 
 ## 18.01.2020 – Release 1.0.1
 
