@@ -29,22 +29,22 @@ Write-Output "Removing all *.pdb files from Publish directory"
 Get-ChildItem "Publish/" -Include *.pdb -Recurse | Remove-Item
 
 # Copy docs, etc to published directories before zipping them
-Write-Output "Copying docs, license, etc to published directories"
+Write-Output "Copying docs, LICENSE.md, etc to published directories"
 
 Copy-Item -Path "DoujinDownloader/Readme.pdf" -Destination "Publish/win-x64/Readme.pdf"
-Copy-Item -Path "LICENSE" -Destination "Publish/win-x64/LICENSE"
+Copy-Item -Path "LICENSE.md" -Destination "Publish/win-x64/LICENSE.md"
 Copy-Item -Path "CHANGELOG.md" -Destination "Publish/win-x64/CHANGELOG.md"
 
 Copy-Item -Path "DoujinDownloader/Readme.pdf" -Destination "Publish/win-x86/Readme.pdf"
-Copy-Item -Path "LICENSE" -Destination "Publish/win-x86/LICENSE"
+Copy-Item -Path "LICENSE.md" -Destination "Publish/win-x86/LICENSE.md"
 Copy-Item -Path "CHANGELOG.md" -Destination "Publish/win-x86/CHANGELOG.md"
 
 Copy-Item -Path "DoujinDownloader/Readme.pdf" -Destination "Publish/linux-x64/Readme.pdf"
-Copy-Item -Path "LICENSE" -Destination "Publish/linux-x64/LICENSE"
+Copy-Item -Path "LICENSE.md" -Destination "Publish/linux-x64/LICENSE.md"
 Copy-Item -Path "CHANGELOG.md" -Destination "Publish/linux-x64/CHANGELOG.md"
 
 Copy-Item -Path "DoujinDownloader/Readme.pdf" -Destination "Publish/osx-x64/Readme.pdf"
-Copy-Item -Path "LICENSE" -Destination "Publish/osx-x64/LICENSE"
+Copy-Item -Path "LICENSE.md" -Destination "Publish/osx-x64/LICENSE.md"
 Copy-Item -Path "CHANGELOG.md" -Destination "Publish/osx-x64/CHANGELOG.md"
 
 # Add everything into archives. Requires installed 7z added to PATH.

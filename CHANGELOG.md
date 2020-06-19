@@ -4,6 +4,7 @@
 
 - Rebuild with **.NET Core 3.1.301**;
 - Update **CommandLineParser** package to **2.8.0**;
+- Moved to **DBAD** license;
 
 ## 18.01.2020 – Release 1.0.1
 

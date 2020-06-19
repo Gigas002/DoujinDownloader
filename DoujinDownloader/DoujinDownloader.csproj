@@ -4,9 +4,17 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <Platforms>AnyCPU;x64</Platforms>
-    <AssemblyVersion>1.0.1.63</AssemblyVersion>
-    <FileVersion>1.0.1.63</FileVersion>
+    <AssemblyVersion>1.0.1.65</AssemblyVersion>
+    <FileVersion>1.0.1.65</FileVersion>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
+    <Version>1.1.0</Version>
+    <Authors>Gigas002</Authors>
+    <Description>Application to organize your doujinshi repository</Description>
+    <Copyright>Copyright © Gigas002 2020</Copyright>
+    <PackageLicenseFile>..\LICENSE.md</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/Gigas002/DoujinDownloader</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Gigas002/DoujinDownloader</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
   </PropertyGroup>
 
   <ItemGroup>
@@ -26,6 +34,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.md">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
