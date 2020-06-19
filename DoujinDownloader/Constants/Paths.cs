@@ -1,4 +1,4 @@
-﻿namespace DoujinDownloader.Enums
+﻿namespace DoujinDownloader.Constants
 {
     /// <summary>
     /// Standard paths for app.
@@ -8,6 +8,6 @@
         /// <summary>
         /// Path to downloaded doujins.
         /// </summary>
-        internal static string DoujinsDirectoryPath { get; } = "Doujins";
+        internal const string DoujinsDirectoryPath = "Doujins";
     }
 }

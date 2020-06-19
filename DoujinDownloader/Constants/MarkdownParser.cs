@@ -1,4 +1,4 @@
-﻿namespace DoujinDownloader.Enums
+﻿namespace DoujinDownloader.Constants
 {
     /// <summary>
     /// Some stuff for .md file in input to parse.
@@ -8,36 +8,36 @@
         /// <summary>
         /// [name](link), language
         /// </summary>
-        internal static string DoujinNamePattern { get; } = @"^\[(?'name'.*)\]\((?'link'.*)\)\,?\ ?(?'language'.*)";
+        internal const string DoujinNamePattern = @"^\[(?'name'.*)\]\((?'link'.*)\)\,?\ ?(?'language'.*)";
 
         /// <summary>
         /// [name](link)
         /// </summary>
-        internal static string ArtistNamePattern { get; } = @"^## \[(?'name'.*)\]\((?'link'.*)\)";
+        internal const string ArtistNamePattern = @"^## \[(?'name'.*)\]\((?'link'.*)\)";
 
         /// <summary>
         /// "- [x] "
         /// </summary>
-        internal static string CheckBoxChecked { get; } = "- [x] ";
+        internal const string CheckBoxChecked = "- [x] ";
 
         /// <summary>
         /// "- [ ] "
         /// </summary>
-        internal static string CheckBoxUnchecked { get; } = "- [ ] ";
+        internal const string CheckBoxUnchecked = "- [ ] ";
 
         /// <summary>
         /// "# "
         /// </summary>
-        internal static string HeaderPattern { get; } = "# ";
+        internal const string HeaderPattern = "# ";
 
         /// <summary>
         /// "## "
         /// </summary>
-        internal static string ArtistPattern { get; } = "## ";
+        internal const string ArtistPattern = "## ";
 
         /// <summary>
         /// "### "
         /// </summary>
-        internal static string SubsectionPattern { get; } = "### ";
+        internal const string SubsectionPattern = "### ";
     }
 }

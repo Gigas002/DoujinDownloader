@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CommandLine;
 using System.Text.Json;
-using DoujinDownloader.Enums;
+using DoujinDownloader.Constants;
 using DoujinDownloader.Localization;
 
 namespace DoujinDownloader
@@ -128,7 +128,7 @@ namespace DoujinDownloader
         /// <param name="t">Array.</param>
         /// <returns></returns>
         private static ReadOnlySpan<T> GetReadOnlySpan<T>(T[] t) => new ReadOnlySpan<T>(t);
-        
+
         /// <summary>
         /// Set properties values from command line options.
         /// </summary>
