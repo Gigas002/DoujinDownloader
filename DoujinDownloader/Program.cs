@@ -128,7 +128,7 @@ namespace DoujinDownloader
         /// <param name="t">Array.</param>
         /// <returns></returns>
         private static ReadOnlySpan<T> GetReadOnlySpan<T>(T[] t) => new ReadOnlySpan<T>(t);
-        
+
         /// <summary>
         /// Set properties values from command line options.
         /// </summary>

@@ -19,5 +19,10 @@
         /// .txt
         /// </summary>
         internal static string TxtExtension { get; } = ".txt";
+
+        /// <summary>
+        /// .html
+        /// </summary>
+        internal const string HtmlExtension = ".html";
     }
 }
