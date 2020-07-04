@@ -14,7 +14,7 @@ Icon is made by [Freepik](https://www.flaticon.com/authors/freepik) from [FlatIc
 
 Current stable can be found here: [![Release](https://img.shields.io/github/release/Gigas002/DoujinDownloader.svg)](https://github.com/Gigas002/DoujinDownloader/releases/latest).
 
-For latest build from master you can use [docker image from github](https://github.com/Gigas002/DoujinDownloader/packages/277538).
+Pre-release versions by CI are also thrown down on [Releases](https://github.com/Gigas002/DoujinDownloader/releases) page.
 
 Information about changes since previous releases can be found in [changelog](https://github.com/Gigas002/DoujinDownloader/blob/master/CHANGELOG.md). This project supports [SemVer 2.0.0](https://semver.org/) (template is `{MAJOR}.{MINOR}.{PATCH}.{BUILD}`).
 
@@ -22,13 +22,15 @@ Previous versions can be found on [releases](https://github.com/Gigas002/DoujinD
 
 ## Build
 
-Solution can be build in **VS2019 (16.6.2+)**. You can also build projects in **VSCode (1.46.1+)** with **[omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) (1.22.1+)** extensions. Projects targets **.NET Core 3.1**, so you’ll need **.NET Core 3.1.301 SDK**.
+Solution can be build in **VS2019 (16.6.3+)**. You can also build projects in **VSCode (1.46.1+)** with **[omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) (1.22.1+)** extensions. Projects targets **.NET Core 5.0.0-preview.6**, so you’ll need **.NET Core 5.0.100-preview.6 SDK**.
 
-**Release** binaries are made by `publish.ps1` script. Take a look at it in the repo. Note, that running this script requires installed **PowerShell** or **[PowerShell Core](https://github.com/PowerShell/PowerShell)** for **Linux**/**OSX** systems.
+**Release** binaries are made by `publish-github-release.ps1` script. Take a look at it in the repo. Note, that running this script requires installed **PowerShell** or **[PowerShell Core](https://github.com/PowerShell/PowerShell)** for **Linux**/**OSX** systems.
 
 ## Docker Image
 
-You can build docker image by running `docker.ps1` script with your **PowerShell**/**PowerShell Core (on Linux)**. It’ll create `doujindownloader` image.
+Latest pre-built docker images (*from master branch*) for **DoujinDownloader** are available on [GitHub packages](https://github.com/Gigas002/DoujinDownloader/packages/277538) (`docker pull docker.pkg.github.com/gigas002/doujindownloader/doujindownloader:latest`) and on [Docker Hub](https://hub.docker.com/r/gigas002/doujindownloader) (`docker pull gigas002/doujindownloader`).
+
+You can also build docker image by yourself by running `publish-local-docker.ps1` script with your **PowerShell**/**PowerShell Core (on Linux)**. It’ll create `doujindownloader` image.
 
 ## Dependencies
 
@@ -51,14 +53,14 @@ You can build docker image by running `docker.ps1` script with your **PowerShell
 
 `-a/--artist` is a **Artist’s name** `string` to get from input file. If not set – gets all artist.
 
-`-u/--uris` is a `string` with path to readu `.txt` file with doujins uris. If not set – created near `.exe`.
+`-u/--uris` is a `string` with path to ready `.txt` file with doujins uris. If not set – created near `.exe`.
 
 Simple example looks like this: `DoujinDownloader -i Doujins.md -j Doujins.json -a ArtistName -u Uris.txt`.
 
 ## How to use md
 
 ```text
-## [Author name](uri)
+## [Author name 'Circle'](uri) //Circle optional
 ### Subsection //tankoubon, etc -- optional
 - [ ] [Doujin name](uri), Language //Not Downloaded
 - [x] [Doujin name]() //Downloaded
