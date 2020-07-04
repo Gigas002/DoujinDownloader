@@ -1,6 +1,7 @@
 {
   "Doujins": [{
     "Artist": "Artist Name",
+    "Circle": "Circle can be null",
     "Subsection": "Subsection can be null",
     "Language": "Language can be null",
     "Name": "Doujin name",

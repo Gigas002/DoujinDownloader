@@ -5,8 +5,8 @@
     <TargetFramework>netcoreapp5.0</TargetFramework>
     <VersionPrefix>1.1.0</VersionPrefix>
     <VersionSuffix>preview.1</VersionSuffix>
-    <AssemblyVersion>1.1.0.70</AssemblyVersion>
-    <FileVersion>1.1.0.70</FileVersion>
+    <AssemblyVersion>1.1.0.126</AssemblyVersion>
+    <FileVersion>1.1.0.126</FileVersion>
     <Platforms>x64</Platforms>
     <Configurations>Debug;Release</Configurations>
     <PackageIcon>icon.png</PackageIcon>

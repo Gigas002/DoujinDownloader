@@ -25,6 +25,7 @@ namespace DoujinDownloader
             IEnumerable<string> markdownLines =
                 await File.ReadAllLinesAsync(markdownFilePath, Encoding.UTF8).ConfigureAwait(false);
             string artist = string.Empty;
+            string circle = string.Empty;
             string subsection = string.Empty;
 
             Doujins doujins = new Doujins();
@@ -39,6 +40,15 @@ namespace DoujinDownloader
                 if (markdownLine.StartsWith(Constants.MarkdownParser.ArtistPattern, StringComparison.Ordinal))
                 {
                     artist = await ParseArtistLineAsync(markdownLine).ConfigureAwait(false);
+                    circle = string.Empty;
+
+                    int circleStart = artist.IndexOf('\'');
+
+                    if (circleStart != -1)
+                    {
+                        circle = artist.Remove(0, circleStart).Replace("\'", string.Empty);
+                        artist = artist.Replace(circle, string.Empty).Replace("\'", string.Empty).Trim();
+                    }
 
                     //if new artist = mark subsection empty
                     subsection = string.Empty;
@@ -72,7 +82,15 @@ namespace DoujinDownloader
 
                 (name, uri, language, isDownloaded) = await Task.Run(() => ParseDoujinLine(markdownLine.Trim())).ConfigureAwait(false);
 
-                doujins.DoujinsList.Add(new Doujin(artist, subsection, language, name, uri, isDownloaded));
+                Doujin doujin = new Doujin
+                {
+                    Artist = artist, Circle = string.IsNullOrWhiteSpace(circle) ? null : circle,
+                    Subsection = string.IsNullOrWhiteSpace(subsection) ? null : subsection,
+                    Language = string.IsNullOrWhiteSpace(language) ? null : language, Name = name, Uri = uri,
+                    IsDownloaded = isDownloaded
+                };
+
+                doujins.DoujinsList.Add(doujin);
             }
 
             return doujins;

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#pragma warning disable CA1031 // Do not catch general exception types
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -85,8 +87,15 @@ namespace DoujinDownloader
             //If input file extensions .json => deserialize it to Doujins object.
             if (InputFileInfo.Extension == Extensions.JsonExtension)
             {
-                byte[] bytes = await File.ReadAllBytesAsync(InputFileInfo.FullName).ConfigureAwait(false);
-                doujins = JsonSerializer.Deserialize<Doujins>(GetReadOnlySpan(bytes));
+                doujins = await JsonSerializer.DeserializeAsync<Doujins>(InputFileInfo.OpenRead()).ConfigureAwait(false);
+
+                //If no doujins in .json file.
+                if (!doujins.DoujinsList.Any())
+                {
+                    Console.WriteLine(Strings.NoDoujinsInInput, Extensions.JsonExtension);
+
+                    return;
+                }
 
                 JsonFileInfo = InputFileInfo;
             }
@@ -120,14 +129,6 @@ namespace DoujinDownloader
             //TODO
             //Download doujin.
         }
-
-        /// <summary>
-        /// Create <see cref="ReadOnlySpan{T}"/> from byte array.
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="t">Array.</param>
-        /// <returns></returns>
-        private static ReadOnlySpan<T> GetReadOnlySpan<T>(T[] t) => new ReadOnlySpan<T>(t);
 
         /// <summary>
         /// Set properties values from command line options.
@@ -257,3 +258,5 @@ namespace DoujinDownloader
         #endregion
     }
 }
+
+#pragma warning restore CA1031 // Do not catch general exception types
