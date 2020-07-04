@@ -3,6 +3,7 @@
 ## WIP
 
 - Rebuild with **.NET 5.0.100-preview.6**;
+- Drop support for x86 builds;
 - Update **CommandLineParser** package to **2.8.0**;
 - Moved to **DBAD** license;
 - Create **Docker image**;
