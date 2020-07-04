@@ -1,6 +1,6 @@
 # DoujinDownloader
 
-Simple app on **.NET Core 3.1** to create and support your local doujins repo.
+Simple app on **.NET 5.0** to create and support your local doujins repo.
 
 Now only creates file with `uri` list, that you can use with, for example, [HitomiDownloader](https://github.com/KurtBestor/Hitomi-Downloader-issues).
 

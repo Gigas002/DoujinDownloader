@@ -2,7 +2,7 @@
 
 ## WIP
 
-- Rebuild with **.NET Core 3.1.301**;
+- Rebuild with **.NET 5.0.100-preview.6**;
 - Update **CommandLineParser** package to **2.8.0**;
 - Moved to **DBAD** license;
 - Create **Docker image**;

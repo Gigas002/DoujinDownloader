@@ -2,20 +2,53 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <VersionPrefix>1.1.0</VersionPrefix>
+    <VersionSuffix>preview.1</VersionSuffix>
+    <AssemblyVersion>1.1.0.70</AssemblyVersion>
+    <FileVersion>1.1.0.70</FileVersion>
     <Platforms>AnyCPU;x64</Platforms>
-    <AssemblyVersion>1.0.1.69</AssemblyVersion>
-    <FileVersion>1.0.1.69</FileVersion>
+    <Configurations>Debug;Release</Configurations>
+    <PackageIcon>icon.png</PackageIcon>
     <ApplicationIcon>Resources\icon.ico</ApplicationIcon>
-    <Version>1.1.0</Version>
+    <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>Gigas002</Authors>
+    <Company>Gigas002</Company>
     <Description>Application to organize your doujinshi repository</Description>
     <Copyright>Copyright © Gigas002 2020</Copyright>
-    <PackageLicenseFile>..\LICENSE.md</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/Gigas002/DoujinDownloader</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Gigas002/DoujinDownloader</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/Gigas002/DoujinDownloader/blob/master/CHANGELOG.md</PackageReleaseNotes>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
     <RepositoryType>git</RepositoryType>
+    <LangVersion>latest</LangVersion>
+    <PackageTags>doujinshi doujin hentai anime downloader json parser</PackageTags>
+    <IsPackable>false</IsPackable>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <!--<PublishSingleFile>true</PublishSingleFile>-->
+    <!--<IncludeAllContentInSingleFile>true</IncludeAllContentInSingleFile>-->
+    <!--<RuntimeIdentifiers>win-x64;linux-x64</RuntimeIdentifiers>-->
+    <!--<PublishTrimmed>true</PublishTrimmed>-->
+    <!--<PublishReadyToRun>true</PublishReadyToRun>-->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE.md" Pack="true" PackagePath="$(PackageLicenseFile)" />
+    <None Include="Resources\icon.png" Pack="true" Visible="true" PackagePath="$(PackageIcon)" />
+    <None Remove="Resources\icon.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Resources\icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.8.0" />
@@ -34,13 +67,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Strings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="..\LICENSE.md">
-      <Pack>True</Pack>
-      <PackagePath></PackagePath>
-    </None>
   </ItemGroup>
 
 </Project>
