@@ -1,6 +1,6 @@
-# Ignore 1 lvl header
+# Always ignore 1 lvl header
 
-## [Artist Name 1 Artist Circle](https://uri-sample.test)
+## [Artist Name 1 'Artist Circle'](https://uri-sample.test)
 
 ### Subsection 1
 
