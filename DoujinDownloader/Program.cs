@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using CommandLine;
 using System.Text.Json;
@@ -214,12 +215,16 @@ namespace DoujinDownloader
             if (txtFileInfo.Exists) txtFileInfo.Delete();
             txtFileInfo.Directory?.Create();
 
+            await using FileStream fileStream = txtFileInfo.OpenWrite();
+
             for (int index = 0; index < doujinsList.Count; index++)
             {
                 string uriToAppend = index == doujinsList.Count - 1
                                          ? $"{doujinsList[index].Uri}"
                                          : $"{doujinsList[index].Uri}, ";
-                await File.AppendAllTextAsync(urisTxtPath, uriToAppend).ConfigureAwait(false);
+
+                byte[] buffer = Encoding.UTF8.GetBytes(uriToAppend);
+                await fileStream.WriteAsync(buffer).ConfigureAwait(false);
             }
         }).ConfigureAwait(false);
 
