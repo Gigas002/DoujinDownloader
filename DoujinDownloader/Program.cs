@@ -120,9 +120,6 @@ namespace DoujinDownloader
             //Print some additional info.
             await PrintCountAsync(doujins).ConfigureAwait(false);
 
-            //Test files names => try to write on disk.
-            await TestDoujinsNamesAsync(doujins, Paths.DoujinsDirectoryPath).ConfigureAwait(false);
-
             //Write uris to use in HitomiDownloader (for example).
             await WriteUrisAsync(doujins, $"{UrisFileInfo.FullName}").ConfigureAwait(false);
 
@@ -198,32 +195,6 @@ namespace DoujinDownloader
             Console.WriteLine(Strings.DoujinsCount, doujins.DoujinsList.Count);
             Console.WriteLine(Strings.DoujinsToDownloadCount, GetDoujinsToDownload(doujins).Count());
         }).ConfigureAwait(false);
-
-        /// <summary>
-        /// Test method for writing test .txt files from doujins list on disk.
-        /// </summary>
-        /// <param name="doujins">Object with <see cref="Doujin"/> list.</param>
-        /// <param name="doujinsDirectoryPath">Directory for doujin files.</param>
-        private static async ValueTask TestDoujinsNamesAsync(Doujins doujins, string doujinsDirectoryPath) =>
-            await Task.Run(() =>
-            {
-                #if RELEASE
-                return;
-                #endif
-
-                Parallel.ForEach(doujins.DoujinsList, doujin =>
-                {
-                    string subsection = string.IsNullOrWhiteSpace(doujin.Subsection) ? string.Empty : doujin.Subsection;
-                    string language = string.IsNullOrWhiteSpace(doujin.Language) ? string.Empty : doujin.Language;
-
-                    string path = Path.Combine(doujinsDirectoryPath, doujin.Artist, subsection, doujin.Name, language,
-                                               $"{doujin.Name}{Extensions.TxtExtension}");
-                    FileInfo doujinFileInfo = new FileInfo(path);
-
-                    doujinFileInfo.Directory?.Create();
-                    doujinFileInfo.Create();
-                });
-            }).ConfigureAwait(false);
 
         /// <summary>
         /// Writes only all uris to download from <see cref="Doujins"/> object to text file.
