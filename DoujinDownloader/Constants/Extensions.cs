@@ -1,7 +1,7 @@
 ﻿namespace DoujinDownloader.Constants
 {
     /// <summary>
-    /// Some FileInfo.Extensions.
+    /// Some FileInfo.Extensions
     /// </summary>
     internal static class Extensions
     {

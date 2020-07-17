@@ -141,6 +141,9 @@
   <data name="NoDoujinsInInput" xml:space="preserve">
     <value>В файле {0} отсутствует додзинси</value>
   </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>{0} не поддерживается</value>
+  </data>
   <data name="UrisWrongExtension" xml:space="preserve">
     <value>Расширение -u/--uris файла не {0}</value>
   </data>

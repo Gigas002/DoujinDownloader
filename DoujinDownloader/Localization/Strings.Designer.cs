@@ -133,6 +133,15 @@ namespace DoujinDownloader.Localization {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} is not supported.
+        /// </summary>
+        internal static string NotSupported {
+            get {
+                return ResourceManager.GetString("NotSupported", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to -u/--uris file extensions is not {0}.
         /// </summary>
         internal static string UrisWrongExtension {

@@ -144,4 +144,7 @@
   <data name="CantParse" xml:space="preserve">
     <value>Can't parse {0}:{1}</value>
   </data>
+  <data name="NotSupported" xml:space="preserve">
+    <value>{0} is not supported</value>
+  </data>
 </root>

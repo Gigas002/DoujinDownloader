@@ -43,11 +43,11 @@ namespace DoujinDownloader
         {
             Stopwatch stopwatch = new Stopwatch();
 
-            //Get command line args.
+            //Get command line args
             Parser.Default.ParseArguments<Options>(args).WithParsed(ParseConsoleOptions)
                   .WithNotParsed(error => IsParsingErrors = true);
 
-            //Stop executing if errors occured.
+            //Stop executing if errors occured
             if (IsParsingErrors) return;
 
             stopwatch.Start();
@@ -64,7 +64,7 @@ namespace DoujinDownloader
                 return;
             }
 
-            //After work is done.
+            //After work is done
             stopwatch.Stop();
             Console.WriteLine(Strings.Done, stopwatch.Elapsed.Hours, stopwatch.Elapsed.Minutes, stopwatch.Elapsed.Seconds, stopwatch.Elapsed.Milliseconds);
         }
@@ -72,60 +72,9 @@ namespace DoujinDownloader
         #region Methods
 
         /// <summary>
-        /// Makes all the work.
+        /// Set properties values from command line options
         /// </summary>
-        /// <returns></returns>
-        private static async ValueTask StartWork()
-        {
-            Doujins doujins = null;
-
-            //If input file extensions .json => deserialize it to Doujins object.
-            if (InputFileInfo.Extension == Extensions.JsonExtension)
-            {
-                doujins = await JsonSerializer.DeserializeAsync<Doujins>(InputFileInfo.OpenRead()).ConfigureAwait(false);
-
-                //If no doujins in .json file.
-                if (!doujins.DoujinsList.Any())
-                {
-                    Console.WriteLine(Strings.NoDoujinsInInput, Extensions.JsonExtension);
-
-                    return;
-                }
-
-                JsonFileInfo = InputFileInfo;
-            }
-            //Else if this is .md file => parse it to Doujins object and write to .json file.
-            else if (InputFileInfo.Extension == Extensions.MarkdownExtension)
-            {
-                doujins = await MarkdownParser.ParseMarkdownAsync(InputFileInfo.FullName)
-                                              .ConfigureAwait(false);
-
-                //If no doujins in .md file.
-                if (!doujins.DoujinsList.Any())
-                {
-                    Console.WriteLine(Strings.NoDoujinsInInput, Extensions.MarkdownExtension);
-
-                    return;
-                }
-
-                //Write to .json
-                await WriteJsonAsync(doujins).ConfigureAwait(false);
-            }
-
-            //Print some additional info.
-            await PrintCountAsync(doujins).ConfigureAwait(false);
-
-            //Write uris to use in HitomiDownloader (for example).
-            await WriteUrisAsync(doujins, $"{UrisFileInfo.FullName}").ConfigureAwait(false);
-
-            //TODO
-            //Download doujin.
-        }
-
-        /// <summary>
-        /// Set properties values from command line options.
-        /// </summary>
-        /// <param name="options">Command line options.</param>
+        /// <param name="options">Command line options</param>
         private static void ParseConsoleOptions(Options options)
         {
             //Check if string options are empty strings.
@@ -167,9 +116,71 @@ namespace DoujinDownloader
         }
 
         /// <summary>
-        /// Writes .json file from <see cref="Doujins"/> object.
+        /// Makes all the work async
         /// </summary>
-        /// <param name="doujins">Object with <see cref="Doujin"/> list.</param>
+        /// <returns></returns>
+        private static async ValueTask StartWork()
+        {
+            Doujins doujins;
+
+            switch (InputFileInfo.Extension)
+            {
+                case Extensions.JsonExtension:
+                {
+                    doujins = await JsonSerializer.DeserializeAsync<Doujins>(InputFileInfo.OpenRead())
+                                                  .ConfigureAwait(false);
+
+                    //If no doujins in .json file.
+                    if (!doujins.DoujinsList.Any())
+                    {
+                        Console.WriteLine(Strings.NoDoujinsInInput, Extensions.JsonExtension);
+
+                        return;
+                    }
+
+                    JsonFileInfo = InputFileInfo;
+
+                    break;
+                }
+                case Extensions.MarkdownExtension:
+                {
+                    doujins = await MarkdownParser.ParseMarkdownAsync(InputFileInfo.FullName).ConfigureAwait(false);
+
+                    //If no doujins in .md file.
+                    if (!doujins.DoujinsList.Any())
+                    {
+                        Console.WriteLine(Strings.NoDoujinsInInput, Extensions.MarkdownExtension);
+
+                        return;
+                    }
+
+                    //Write to .json
+                    await WriteJsonAsync(doujins).ConfigureAwait(false);
+
+                    break;
+                }
+                default:
+                {
+                    Console.WriteLine(Strings.NotSupported, InputFileInfo.Extension);
+
+                    return;
+                }
+            }
+
+            //Print some additional info
+            await PrintCountAsync(doujins).ConfigureAwait(false);
+
+            //Write uris to use in HitomiDownloader (for example)
+            await WriteUrisAsync(doujins, $"{UrisFileInfo.FullName}").ConfigureAwait(false);
+
+            //TODO
+            //Download doujins
+        }
+
+        /// <summary>
+        /// Writes .json file from <see cref="Doujins"/> object
+        /// </summary>
+        /// <param name="doujins">Object with <see cref="Doujin"/> list</param>
         private static async ValueTask WriteJsonAsync(Doujins doujins) => await Task.Run(async () =>
         {
             JsonFileInfo.Directory?.Create();
@@ -181,9 +192,9 @@ namespace DoujinDownloader
         }).ConfigureAwait(false);
 
         /// <summary>
-        /// Prints count of doujins list.
+        /// Prints count of doujins list and doujins to download
         /// </summary>
-        /// <param name="doujins">Object with <see cref="Doujin"/> list.</param>
+        /// <param name="doujins">Object with <see cref="Doujin"/> list</param>
         private static async ValueTask PrintCountAsync(Doujins doujins) => await Task.Run(() =>
         {
             Console.WriteLine(Strings.DoujinsCount, doujins.DoujinsList.Count);
@@ -191,10 +202,10 @@ namespace DoujinDownloader
         }).ConfigureAwait(false);
 
         /// <summary>
-        /// Writes only all uris to download from <see cref="Doujins"/> object to text file.
+        /// Writes all uris to download from <see cref="Doujins"/> object to text file
         /// </summary>
-        /// <param name="doujins">Object with <see cref="Doujin"/> list.</param>
-        /// <param name="urisTxtPath">Full path to uris.txt file..</param>
+        /// <param name="doujins">Object with <see cref="Doujin"/> list</param>
+        /// <param name="urisTxtPath">Full path to uris.txt file</param>
         private static async ValueTask WriteUrisAsync(Doujins doujins, string urisTxtPath) => await Task.Run(async () =>
         {
             List<Doujin> doujinsList = GetDoujinsToDownload(doujins).ToList();
@@ -213,12 +224,12 @@ namespace DoujinDownloader
         }).ConfigureAwait(false);
 
         /// <summary>
-        /// Gets list of doujins to download.
+        /// Gets list of <see cref="Doujin"/>s to download
         /// </summary>
-        /// <param name="doujins">Object with <see cref="Doujin"/> list.</param>
-        /// <returns>List of <see cref="Doujin"/> objects.</returns>
+        /// <param name="doujins">Object with <see cref="Doujin"/> list</param>
+        /// <returns><see cref="IEnumerable{T}"/> of <see cref="Doujin"/> objects</returns>
         private static IEnumerable<Doujin> GetDoujinsToDownload(Doujins doujins) =>
-            doujins.DoujinsList.Where(doujin => doujin.Uri != null && !doujin.IsDownloaded).AsParallel();
+            doujins.DoujinsList.AsParallel().Where(doujin => doujin.Uri != null && !doujin.IsDownloaded);
 
         #endregion
     }

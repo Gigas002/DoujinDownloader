@@ -29,17 +29,17 @@ namespace DoujinDownloader.HitomiDownloader
         private static string GetHitomiGalleryJsString(int galleryId) => $"https://ltn.hitomi.la/galleries/{galleryId}.js";
 
         /// <summary>
-        /// Create <see cref="ReadOnlySpan{T}"/> from byte array.
+        /// Create <see cref="ReadOnlySpan{T}"/> from byte array
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="t">Array.</param>
+        /// <param name="t">Array</param>
         /// <returns></returns>
         private static ReadOnlySpan<T> GetReadOnlySpan<T>(T[] t) => new ReadOnlySpan<T>(t);
 
         /// <summary>
         /// Downloads one doujin from Hitomi.la
         /// </summary>
-        /// <param name="doujinUri"></param>
+        /// <param name="doujinUri">Gallery's uri</param>
         /// <returns></returns>
         internal static async ValueTask DownloadDoujin(Uri doujinUri)
         {
@@ -54,7 +54,7 @@ namespace DoujinDownloader.HitomiDownloader
 
             GalleryInfo gi = JsonSerializer.Deserialize<GalleryInfo>(GetReadOnlySpan(bytes));
 
-            //TODO output paths
+            //TODO pass output paths to the method
             DirectoryInfo directoryInfo = new DirectoryInfo($"{galleryId}");
             directoryInfo.Create();
 
@@ -123,7 +123,7 @@ namespace DoujinDownloader.HitomiDownloader
             await using FileStream fileStream = imageInfo.ImageFileInfo.OpenWrite();
 
             int bytesRead;
-            while (stream != null && (bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false)) > 0)
+            while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length).ConfigureAwait(false)) > 0)
                 await fileStream.WriteAsync(buffer, 0, bytesRead).ConfigureAwait(false);
         }
     }
