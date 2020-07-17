@@ -22,12 +22,6 @@ namespace DoujinDownloader
         #region Optional
 
         /// <summary>
-        /// Artist name.
-        /// </summary>
-        [Option('a', "artist", Required = false, HelpText = "Artist name.")]
-        public string ArtistName { get; set; } = string.Empty;
-
-        /// <summary>
         /// Path to converted json.
         /// </summary>
         [Option('j', "json", Required = false, HelpText = "Path to converted json.")]

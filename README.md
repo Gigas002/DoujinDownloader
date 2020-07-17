@@ -22,7 +22,7 @@ Previous versions can be found on [releases](https://github.com/Gigas002/DoujinD
 
 ## Build
 
-Solution can be build in **VS2019 (16.6.3+)**. You can also build projects in **VSCode (1.46.1+)** with **[omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) (1.22.1+)** extensions. Projects targets **.NET Core 5.0.0-preview.6**, so you’ll need **.NET Core 5.0.100-preview.6 SDK**.
+Solution can be build in **VS2019 (16.6.4+)**. You can also build projects in **VSCode (1.47.2+)** with **[omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) (1.22.1+)** extensions. Projects targets **.NET Core 5.0.0-preview.6**, so you’ll need **.NET Core 5.0.100-preview.6 SDK**.
 
 **Release** binaries are made by `publish-github-release.ps1` script. Take a look at it in the repo. Note, that running this script requires installed **PowerShell** or **[PowerShell Core](https://github.com/PowerShell/PowerShell)** for **Linux**/**OSX** systems.
 
@@ -42,7 +42,6 @@ You can also build docker image by yourself by running `publish-local-docker.ps1
 | :--------: | :-------: | :------------------------: | :-------: |
 |     -i     |   --input   | Input file (`.md`/`.json`) | Yes |
 |     -j     |   --json   | Path to converted from `.md` ``.json` file | No |
-| -a | --artist | Artist name to get from input file | No |
 | -u | --uris | Path to ready `uris.txt` file | No |
 |  | --version | Current version |  |
 |  | --help | Message about command line options |  |
@@ -50,8 +49,6 @@ You can also build docker image by yourself by running `publish-local-docker.ps1
 `-i/--input` is a `string` with path to `.md` or `.json` file with doujins list.
 
 `-j/--json` is a `string` with path to converted `.json` file with doujins list. If not set – created near `.exe`.
-
-`-a/--artist` is a **Artist’s name** `string` to get from input file. If not set – gets all artist.
 
 `-u/--uris` is a `string` with path to ready `.txt` file with doujins uris. If not set – created near `.exe`.
 

@@ -23,11 +23,6 @@ namespace DoujinDownloader
         private static FileInfo InputFileInfo { get; set; }
 
         /// <summary>
-        /// Artist name.
-        /// </summary>
-        private static string ArtistName { get; set; }
-
-        /// <summary>
         /// Converted .json (if input was .md).
         /// </summary>
         private static FileInfo JsonFileInfo { get; set; }
@@ -102,7 +97,7 @@ namespace DoujinDownloader
             //Else if this is .md file => parse it to Doujins object and write to .json file.
             else if (InputFileInfo.Extension == Extensions.MarkdownExtension)
             {
-                doujins = await MarkdownParser.ParseMarkdownAsync(InputFileInfo.FullName, ArtistName)
+                doujins = await MarkdownParser.ParseMarkdownAsync(InputFileInfo.FullName)
                                               .ConfigureAwait(false);
 
                 //If no doujins in .md file.
@@ -144,7 +139,6 @@ namespace DoujinDownloader
 
             //Set properties values.
             InputFileInfo = new FileInfo(options.InputFilePath);
-            ArtistName = options.ArtistName;
             JsonFileInfo = new FileInfo(options.JsonPath);
             UrisFileInfo = new FileInfo(options.UrisPath);
 
