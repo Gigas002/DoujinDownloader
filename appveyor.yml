@@ -20,7 +20,7 @@ artifacts:
 - path: Publish\*.zip
 deploy:
 - provider: GitHub
-  release: CI-$APPVEYOR_BUILD_VERSION
+  release: Continious build
   description: Information about changes since previous release can be found in [changelog](https://github.com/Gigas002/DoujinDownloader/blob/master/CHANGELOG.md).
   auth_token:
     secure: CVNtkV9r681t1pehmnG8nA==
@@ -29,3 +29,5 @@ deploy:
   force_update: true
   on:
     branch: master
+after_deploy:
+- pwsh: ./publish-github-docker.ps1 $env:GH_TOKEN
