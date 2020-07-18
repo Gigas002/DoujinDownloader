@@ -207,26 +207,21 @@ namespace DoujinDownloader
         /// </summary>
         /// <param name="doujins">Object with <see cref="Doujin"/> list</param>
         /// <param name="urisTxtPath">Full path to uris.txt file</param>
-        private static async ValueTask WriteUrisAsync(Doujins doujins, string urisTxtPath) => await Task.Run(async () =>
+        private static async ValueTask WriteUrisAsync(Doujins doujins, string urisTxtPath)
         {
             List<Doujin> doujinsList = GetDoujinsToDownload(doujins).ToList();
 
             FileInfo txtFileInfo = new FileInfo(urisTxtPath);
             if (txtFileInfo.Exists) txtFileInfo.Delete();
             txtFileInfo.Directory?.Create();
-
             await using FileStream fileStream = txtFileInfo.OpenWrite();
 
-            for (int index = 0; index < doujinsList.Count; index++)
+            foreach (Doujin doujin in doujinsList)
             {
-                string uriToAppend = index == doujinsList.Count - 1
-                                         ? $"{doujinsList[index].Uri}"
-                                         : $"{doujinsList[index].Uri}, ";
-
-                byte[] buffer = Encoding.UTF8.GetBytes(uriToAppend);
+                byte[] buffer = Encoding.UTF8.GetBytes($"{doujin.Uri} ");
                 await fileStream.WriteAsync(buffer).ConfigureAwait(false);
             }
-        }).ConfigureAwait(false);
+        }
 
         /// <summary>
         /// Gets list of <see cref="Doujin"/>s to download
