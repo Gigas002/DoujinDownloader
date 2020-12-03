@@ -10,11 +10,11 @@ Icon is made by [Freepik](https://www.flaticon.com/authors/freepik) from [FlatIc
 
 [![Build status](https://ci.appveyor.com/api/projects/status/8c8nxdm8sniqkxeq?svg=true)](https://ci.appveyor.com/project/Gigas002/doujindownloader) [![Actions Status](https://github.com/Gigas002/DoujinDownloader/workflows/.NET%20Core/badge.svg)](https://github.com/Gigas002/DoujinDownloader/actions)
 
-##  Current version
+## Current version
 
 Current stable can be found here: [![Release](https://img.shields.io/github/release/Gigas002/DoujinDownloader.svg)](https://github.com/Gigas002/DoujinDownloader/releases/latest).
 
-Pre-release versions by CI are also thrown down on [Releases](https://github.com/Gigas002/DoujinDownloader/releases) page.
+Pre-release versions by CI/CD are also thrown down on [Releases](https://github.com/Gigas002/DoujinDownloader/releases) page.
 
 Information about changes since previous releases can be found in [changelog](https://github.com/Gigas002/DoujinDownloader/blob/master/CHANGELOG.md). This project supports [SemVer 2.0.0](https://semver.org/) (template is `{MAJOR}.{MINOR}.{PATCH}.{BUILD}`).
 
@@ -22,7 +22,7 @@ Previous versions can be found on [releases](https://github.com/Gigas002/DoujinD
 
 ## Build
 
-Solution can be build in **VS2019 (16.6.4+)**. You can also build projects in **VSCode (1.47.2+)** with **[omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) (1.22.1+)** extensions. Projects targets **.NET Core 5.0.0-preview.6**, so you’ll need **.NET Core 5.0.100-preview.6 SDK**.
+Solution can be build in **VS2019 (16.8.1+)**. You can also build projects in **VSCode (1.51.1+)** with **[omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) (1.23.6+)** extension. Projects targets **.NET 5.0.0**, so you’ll need **.NET 5.0.100 SDK**.
 
 **Release** binaries are made by `publish-github-release.ps1` script. Take a look at it in the repo. Note, that running this script requires installed **PowerShell** or **[PowerShell Core](https://github.com/PowerShell/PowerShell)** for **Linux**/**OSX** systems.
 
@@ -38,13 +38,13 @@ You can also build docker image by yourself by running `publish-local-docker.ps1
 
 ## Input parameters
 
-| Short name | Long name |        Description         | Required? |
-| :--------: | :-------: | :------------------------: | :-------: |
-|     -i     |   --input   | Input file (`.md`/`.json`) | Yes |
-|     -j     |   --json   | Path to converted from `.md` ``.json` file | No |
-| -u | --uris | Path to ready `uris.txt` file | No |
-|  | --version | Current version |  |
-|  | --help | Message about command line options |  |
+| Short name | Long name |                Description                | Required? |
+| :--------: | :-------: | :---------------------------------------: | :-------: |
+|     -i     |  --input  |        Input file (`.md`/`.json`)         |    Yes    |
+|     -j     |  --json   | Path to converted from `.md` `.json` file |    No     |
+|     -u     |  --uris   |       Path to ready `uris.txt` file       |    No     |
+|            | --version |              Current version              |           |
+|            |  --help   |    Message about command line options     |           |
 
 `-i/--input` is a `string` with path to `.md` or `.json` file with doujins list.
 

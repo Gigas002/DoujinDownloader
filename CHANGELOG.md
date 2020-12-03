@@ -1,14 +1,14 @@
 # CHANGELOG
 
-## WIP
+## WIP -- Release 1.1.0
 
-- Rebuild with **.NET 5.0.100-preview.6**;
+- Rebuild with **.NET 5.0.100**;
 - Drop support for x86 builds;
 - Update **CommandLineParser** package to **2.8.0**;
 - Moved to **DBAD** license;
 - Create **Docker image**;
 - Improved CI/CD;
-- *wip feature* Doujins from **hitmoi.la** now downloads as they should;
+- *not yet available for using* Doujins from **hitmoi.la** now downloads as they should;
 
 ## 18.01.2020 – Release 1.0.1
 
