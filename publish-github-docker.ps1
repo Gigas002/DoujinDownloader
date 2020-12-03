@@ -1,5 +1,15 @@
 $GH_TOKEN=$args[0]
-if($GH_TOKEN)
+$appveyorWorker=$args[1]
+
+$appVsProfile="Visual Studio 2019"
+
+if (($appveyorWorker -eq $appVsProfile) -or $IsMacOS)
+{
+    Write-Output "Using VS2019, skip publishing docker image..."
+    return
+}
+
+if ($GH_TOKEN)
 {    
     docker login -u Gigas002 -p $GH_TOKEN docker.pkg.github.com
     docker build -t docker.pkg.github.com/gigas002/doujindownloader/doujindownloader:latest -f Dockerfile .
