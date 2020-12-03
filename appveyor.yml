@@ -5,6 +5,7 @@ skip_tags: true
 image:
 - macOS
 - Ubuntu2004
+- Visual Studio 2019
 platform: x64
 environment:
   GH_TOKEN:
@@ -15,19 +16,19 @@ build:
   parallel: true
   verbosity: minimal
 after_build:
-- pwsh: ./publish-github-release.ps1 true
+- pwsh: ./publish-github-release.ps1
 artifacts:
 - path: Publish\*.zip
+  name: zip
 deploy:
 - provider: GitHub
   release: Continious build
   description: Information about changes since previous release can be found in [changelog](https://github.com/Gigas002/DoujinDownloader/blob/master/CHANGELOG.md).
-  auth_token:
-    secure: CVNtkV9r681t1pehmnG8nA==
+  auth_token: $(GH_TOKEN)
   artifact: /.*\.zip/
   prerelease: true
   force_update: true
   on:
     branch: master
 after_deploy:
-- pwsh: ./publish-github-docker.ps1 $env:GH_TOKEN
+- pwsh: ./publish-github-docker.ps1 $env:GH_TOKEN $env:APPVEYOR_BUILD_WORKER_IMAGE
