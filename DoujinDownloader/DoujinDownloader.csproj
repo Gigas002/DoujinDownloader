@@ -2,11 +2,11 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp5.0</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <VersionPrefix>1.1.0</VersionPrefix>
-    <VersionSuffix>preview.1</VersionSuffix>
-    <AssemblyVersion>1.1.0.144</AssemblyVersion>
-    <FileVersion>1.1.0.144</FileVersion>
+    <VersionSuffix>preview.0</VersionSuffix>
+    <AssemblyVersion>1.1.0.1</AssemblyVersion>
+    <FileVersion>1.1.0.1</FileVersion>
     <Platforms>x64</Platforms>
     <Configurations>Debug;Release</Configurations>
     <PackageIcon>icon.png</PackageIcon>
@@ -28,8 +28,8 @@
 
   <PropertyGroup>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <DebugType>full</DebugType>
-    <DebugSymbols>true</DebugSymbols>
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)'=='Release'">

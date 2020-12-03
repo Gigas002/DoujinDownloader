@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## WIP -- Release 1.1.0
+## 03.12.2020 -- Release 1.1.0
 
 - Rebuild with **.NET 5.0.100**;
 - Drop support for x86 builds;
