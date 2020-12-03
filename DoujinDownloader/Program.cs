@@ -1,6 +1,4 @@
-﻿#pragma warning disable CA1031 // Do not catch general exception types
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -129,7 +127,7 @@ namespace DoujinDownloader
                 case Extensions.JsonExtension:
                 {
                     doujins = await JsonSerializer.DeserializeAsync<Doujins>(InputFileInfo.OpenRead())
-                                                  .ConfigureAwait(false);
+                                                  .ConfigureAwait(false) ?? new Doujins();
 
                     //If no doujins in .json file.
                     if (!doujins.DoujinsList.Any())
@@ -234,5 +232,3 @@ namespace DoujinDownloader
         #endregion
     }
 }
-
-#pragma warning restore CA1031 // Do not catch general exception types
