@@ -3,13 +3,13 @@ pull_requests:
   do_not_increment_build_number: true
 skip_tags: true
 image:
-- macOS
+#- macOS
 - Ubuntu2004
-- Visual Studio 2019
+- Visual Studio 2022
 platform: x64
 environment:
   GH_TOKEN:
-    secure: nzUU8F4CLe1EDxmKabW5Ym6NnL0SEK+VLft2D8oh72KEcfejyt1xWsQq9dMg6Wpt
+    secure: WUHSr0sH43a4MkjIqgZrx6IGlAg5UMzX7haEApLdhhD0qrq9rs/L6w6kVflhNnWN
 before_build:
 - pwsh: dotnet restore
 build:
