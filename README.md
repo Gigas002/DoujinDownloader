@@ -1,6 +1,6 @@
 # DoujinDownloader
 
-Simple app on **.NET 5.0** to create and support your local doujins repo.
+Simple app on **.NET 6.0** to create and support your local doujins repo.
 
 Now only creates file with `uri` list, that you can use with, for example, [HitomiDownloader](https://github.com/KurtBestor/Hitomi-Downloader-issues).
 
@@ -22,7 +22,7 @@ Previous versions can be found on [releases](https://github.com/Gigas002/DoujinD
 
 ## Build
 
-Solution can be build in **VS2019 (16.8.1+)**. You can also build projects in **VSCode (1.51.1+)** with **[omnisharp-vscode](https://github.com/OmniSharp/omnisharp-vscode) (1.23.6+)** extension. Projects targets **.NET 5.0.0**, so you’ll need **.NET 5.0.100 SDK**.
+Projects targets **.NET 6.0.0**, so you’ll need **.NET 6.0.100 SDK**.
 
 **Release** binaries are made by `publish-github-release.ps1` script. Take a look at it in the repo. Note, that running this script requires installed **PowerShell** or **[PowerShell Core](https://github.com/PowerShell/PowerShell)** for **Linux**/**OSX** systems.
 

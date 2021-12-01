@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## ?? -- Release 2.0.0
+
+- Upgrade to **.NET 6.0.100**;
+
 ## 03.12.2020 -- Release 1.1.0
 
 - Rebuild with **.NET 5.0.100**;

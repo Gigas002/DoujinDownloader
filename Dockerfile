@@ -1,5 +1,5 @@
 # https://hub.docker.com/_/microsoft-dotnet-core
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /DoujinDownloader
 
 # copy csproj and restore as distinct layers
@@ -14,7 +14,7 @@ RUN dotnet publish DoujinDownloader/DoujinDownloader.csproj -c Release -o /app -
 # RUN dotnet publish DoujinDownloader/DoujinDownloader.csproj -c Release -o /app -r linux-x64 --self-contained true --no-restore /p:PublishTrimmed=true /p:PublishReadyToRun=true
 
 # final stage/image
-FROM mcr.microsoft.com/dotnet/runtime:5.0-focal
+FROM mcr.microsoft.com/dotnet/runtime:6.0-focal
 WORKDIR /app
 COPY --from=build /app .
 ENTRYPOINT ["dotnet", "DoujinDownloader.dll"]
