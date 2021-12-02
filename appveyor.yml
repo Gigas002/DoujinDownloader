@@ -9,7 +9,7 @@ image:
 platform: x64
 environment:
   GH_TOKEN:
-    secure: L9KLCYsZKPi6a6qSX3sRoT1ny8m2G9jmw9iUlGzmEbnvzhTbdpGbeMqhKeDyOOPJz4kLuPb2aU2lTXxCGm9+4I83CxTpnmI2oPDz2GqWfqA=
+    secure: 54Mee2f+YfZkeBfnRY3k47s32QDdxpTSW8d2H2SHzUA7oKu72gQjTD1SVqZadBmN
 before_build:
 - pwsh: dotnet restore
 build:
