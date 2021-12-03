@@ -1,209 +1,134 @@
-﻿using DoujinDownloader.Localization;
-using System.Text;
-using System.Text.RegularExpressions;
+﻿namespace DoujinDownloader;
 
-// ReSharper disable UnusedMember.Local
-
-namespace DoujinDownloader;
-
-/// <summary>
-/// Class to parse .md file into <see cref="Doujins"/> object
-/// </summary>
-internal static class MarkdownParser
+public class MarkdownParser
 {
     #region Constants
 
     /// <summary>
-    /// [name](link), language
-    /// </summary>
-    private const string DoujinNamePattern = @"^\[(?'name'.*)\]\((?'link'.*)\)\,?\ ?(?'language'.*)";
-
-    /// <summary>
-    /// [name](link)
-    /// </summary>
-    private const string ArtistNamePattern = @"^## \[(?'name'.*)\]\((?'link'.*)\)";
-
-    /// <summary>
     /// Downloaded doujin line starting symbols
     /// </summary>
-    private const string CheckBoxChecked = "- [x] ";
-
-    /// <summary>
-    /// Not downloaded doujin line starting symbols
-    /// </summary>
-    private const string CheckBoxUnchecked = "- [ ] ";
-
-    /// <summary>
-    /// Document's header line starting symbols
-    /// </summary>
-    private const string HeaderPattern = "# ";
+    private const string Checked = "- [x]";
 
     /// <summary>
     /// Artist and circle name line starting symbols
     /// </summary>
     private const string ArtistPattern = "## ";
 
-    /// <summary>
-    /// Subsection line starting symbols
-    /// </summary>
-    private const string SubsectionPattern = "### ";
+    private const char TagSeparator = ';';
 
     #endregion
 
-    #region Methods
-
-    /// <summary>
-    /// Parse <see cref="Doujins"/> .md file into <see cref="Doujins"/> list
-    /// </summary>
-    /// <param name="markdownFilePath">Full path to .md file</param>
-    /// <returns><see cref="Doujins"/> object with <see cref="Doujin"/> collection</returns>
-    internal static async ValueTask<Doujins> ParseMarkdownAsync(string markdownFilePath)
+    public static IEnumerable<Doujin> ParseMarkdownAsync(IEnumerable<string> markdownLines)
     {
-        IEnumerable<string> markdownLines = await File.ReadAllLinesAsync(markdownFilePath, Encoding.UTF8).ConfigureAwait(false);
+        var doujins = new List<Doujin>();
 
-        return await ParseMarkdownAsync(markdownLines).ConfigureAwait(false);
-    }
-
-    /// <summary>
-    /// Parse lines from <see cref="Doujins"/> .md file into <see cref="Doujins"/> list
-    /// </summary>
-    /// <param name="markdownLines">Lines from <see cref="Doujins"/> .md file</param>
-    /// <returns><see cref="Doujins"/> object with <see cref="Doujin"/> collection</returns>
-    private static async ValueTask<Doujins> ParseMarkdownAsync(IEnumerable<string> markdownLines)
-    {
-        Doujins doujins = new Doujins();
-
-        string artist = null;
-        string circle = null;
+        DoujinAuthor author = null;
         string subsection = null;
 
         const string subsectionShortStart = "###";
         const string doujinShortStart = "- [";
 
-        // Don't pause the main thread's work
-        await Task.Run(() =>
+        // Skip empty lines
+        var lines = markdownLines.Where(markdownLine => !string.IsNullOrWhiteSpace(markdownLine));
+
+        foreach (var markdownLine in lines)
         {
-            foreach (string markdownLine in markdownLines.Where(markdownLine =>
-                                                                    !string.IsNullOrWhiteSpace(markdownLine)))
+            var lineStart = markdownLine[..3];
+
+            switch (lineStart)
             {
-                string lineStart = markdownLine.Substring(0, 3);
-
-                switch (lineStart)
+                case ArtistPattern:
                 {
-                    case ArtistPattern:
-                        {
-                            (artist, circle) = ParseArtistCircleLine(markdownLine);
+                    author = ParseAuthorLine(markdownLine);
 
-                                //if new artist = mark subsection empty
-                                subsection = null;
+                    // if new artist = mark subsection empty
+                    subsection = null;
 
-                            break;
-                        }
-                    case subsectionShortStart:
-                        {
-                            subsection = markdownLine.Remove(0, 4).Trim();
+                    break;
+                }
+                case subsectionShortStart:
+                {
+                    subsection = markdownLine[4..].Trim();
 
-                            break;
-                        }
-                    case doujinShortStart:
-                        {
-                            doujins.DoujinsList.Add(CreateDoujin(markdownLine, artist, circle, subsection));
+                    break;
+                }
+                case doujinShortStart:
+                {
+                    var doujin = ParseDoujinLine(markdownLine, author, subsection);
+                    doujins.Add(doujin);
 
-                            break;
-                        }
+                    break;
                 }
             }
-        }).ConfigureAwait(false);
+        }
 
         return doujins;
     }
 
-    /// <summary>
-    /// Creates one doujin from markdown line
-    /// </summary>
-    /// <param name="markdownLine">Line to parse</param>
-    /// <param name="artist">Artist name</param>
-    /// <param name="circle">Circle name
-    /// <para/>Optional, <see langword="null"/> by default</param>
-    /// <param name="subsection">Tankoubon, etc
-    /// <para/>Optional, <see langword="null"/> by default</param>
-    /// <returns>New <see cref="Doujin"/> object</returns>
-    private static Doujin CreateDoujin(string markdownLine, string artist, string circle = null,
-                                       string subsection = null)
+    public static Doujin ParseDoujinLine(string doujinLine, DoujinAuthor author, string subsection = null)
     {
-        //Get doujin name and stuff
-        string name;
-        Uri uri;
-        string language;
-        bool isDownloaded;
+        var checkBox = doujinLine[..5];
+        var isDownloaded = checkBox == Checked;
 
-        (name, uri, language, isDownloaded) = ParseDoujinLine(markdownLine.Trim());
+        var djLine = doujinLine.Split(checkBox)[1];
+        var splitByTagSeparator = djLine.Split(TagSeparator);
+
+        string[] tags = null;
+
+        if (splitByTagSeparator.Length == 2) tags = splitByTagSeparator[1].Split(",").Select(t => t.Trim()).ToArray();
+
+        var splitByUrlBlock = splitByTagSeparator[0].Split("](");
+        var urlAndLanguage = splitByUrlBlock[1].Replace(")", string.Empty).Split(',');
+        var url = urlAndLanguage[0].Trim();
+
+        string lang = null;
+        if (urlAndLanguage.Length == 2) lang = urlAndLanguage[1].Trim();
+
+        var name = splitByUrlBlock[0].Trim()[1..];
 
         return new Doujin
         {
-            Artist = artist, Circle = circle, Subsection = subsection,
-            Language = language, Name = name, Uri = uri,
-            IsDownloaded = isDownloaded
+            Author = author,
+            Language = lang,
+            IsDownloaded = isDownloaded,
+            Name = name,
+            Subsection = subsection,
+            Tags = tags,
+            Url = string.IsNullOrWhiteSpace(url) ? null : new Uri(url)
         };
     }
 
-    /// <summary>
-    /// Parse artist and circle from markdown line
-    /// </summary>
-    /// <param name="markdownLine">Artist line in .md file</param>
-    /// <returns><see cref="ValueTuple{T1, T2}"/> with artist and circle</returns>
-    private static (string artist, string circle) ParseArtistCircleLine(
-        string markdownLine)
+    public static DoujinAuthor ParseAuthorLine(string authorLine)
     {
-        Match match = Regex.Match(markdownLine, ArtistNamePattern);
-        if (!match.Success) throw new Exception(string.Format(Strings.CantParse, nameof(markdownLine), markdownLine));
+        var splitByTagSeparator = authorLine.Split(TagSeparator);
 
-        string artistCircleLine = match.Groups["name"].Value;
-        string artist = artistCircleLine;
-        int circleStart = artistCircleLine.IndexOf('\'');
+        string[] tags = null;
+        if (splitByTagSeparator.Length == 2) tags = splitByTagSeparator[1].Split(",").Select(t => t.Trim()).ToArray();
 
-        if (circleStart == -1) return (artist, null);
+        var splitByUrlBlock = splitByTagSeparator[0].Split("](");
+        var url = splitByUrlBlock[1].Replace(")", string.Empty);
+        var namesAndCircles = splitByUrlBlock[0].Remove(0, 4);
+        var circlesStartIndex = namesAndCircles.IndexOf('\'');
 
-        string circle = artistCircleLine.Remove(0, circleStart).Replace("\'", string.Empty);
-        artist = artistCircleLine.Replace(circle, string.Empty).Replace("\'", string.Empty).Trim();
+        string[] names;
+        string[] circles = null;
 
-        return (artist, circle);
+        if (circlesStartIndex <= 0)
+        {
+            names = namesAndCircles.Split(',');
+        }
+        else
+        {
+            names = namesAndCircles[..circlesStartIndex].Split(',');
+            circles = namesAndCircles[circlesStartIndex..].Replace("\'", string.Empty).Split(',');
+        }
+
+        return new DoujinAuthor
+        {
+            Names = names,
+            Circles = circles,
+            Url = string.IsNullOrWhiteSpace(url) ? null : new Uri(url),
+            Tags = tags
+        };
     }
-
-    /// <summary>
-    /// Parse markdown line from .md file
-    /// </summary>
-    /// <param name="markdownLine">Doujin line in .md file</param>
-    /// <returns><see cref="ValueTuple{T1, T2, T3, T4}"/> with doujin name, uri,
-    /// language and isDownload</returns>
-    private static (string name, Uri uri, string language, bool isDownloaded) ParseDoujinLine(string markdownLine)
-    {
-        bool isDownloaded = IsDownloadedDoujin(markdownLine);
-
-        //Remove "- [ ] "/"- [x] "
-        string name = markdownLine.Remove(0, 6).Trim();
-
-        Match match = Regex.Match(name, DoujinNamePattern);
-
-        if (!match.Success) throw new Exception(string.Format(Strings.CantParse, nameof(markdownLine), markdownLine));
-
-        name = match.Groups[nameof(name)].Value;
-        string link = match.Groups[nameof(link)].Value;
-        string language = match.Groups[nameof(language)].Value;
-        language = string.IsNullOrWhiteSpace(language) ? null : language;
-        Uri uri = string.IsNullOrWhiteSpace(link) ? null : new Uri(link);
-
-        return (name, uri, language, isDownloaded);
-    }
-
-    /// <summary>
-    /// Check if doujin is already downloaded
-    /// </summary>
-    /// <param name="markdownLine">Doujin line in .md file</param>
-    /// <returns><see langword="true"/> if doujin already downloaded;
-    /// <see langword="false"/> otherwise</returns>
-    private static bool IsDownloadedDoujin(string markdownLine) =>
-        markdownLine.StartsWith(CheckBoxChecked, StringComparison.Ordinal);
-
-    #endregion
 }
