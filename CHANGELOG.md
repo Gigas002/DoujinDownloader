@@ -9,7 +9,7 @@
 - Added ability to select multiple author circles;
 - Added ability to write tags to both authors and doujins;
 - Fixed CI and docker builds;
-- Changed output `urls.txt` to be compatible with `gallery-dl` script;
+- Changed output `urls.txt` to be compatible with `gallery-dl` script (still compatible with HitomiDownloader too);
 
 ## 03.12.2020 -- Release 1.1.0
 
