@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## ?? -- Release 2.0.0
+## 03.12.2021 -- Release 2.0.0
 
 **Breaking:** below changes compatible with `.md` input, but incompatible with `.json`.
 
