@@ -1,15 +1,62 @@
-{
-  "Doujins": [{
-    "Artist": "Artist Name",
-    "Circle": "Circle can be null",
-    "Subsection": "Subsection can be null",
-    "Language": "Language can be null",
-    "Name": "Doujin name",
-    "Uri": "Doujin uri can be null (but be sure to set IsDownloaded to true)",
+[
+  {
+    "Author": {
+      "Names": ["Artist Name 1", " Alternative Name "],
+      "Circles": ["Artist Circle", " Alternative Circle"],
+      "Url": "https://uri-sample.test",
+      "Tags": ["tag1", "tag2", "tag3"]
+    },
+    "Subsection": "Subsection 1",
+    "Language": "Language",
+    "Name": "Doujin 1",
+    "Url": "https://uri-sample.test",
+    "IsDownloaded": true,
+    "Tags": ["tag1", "tag2", "tag3"]
+  },
+  {
+    "Author": {
+      "Names": ["Artist Name 1", " Alternative Name "],
+      "Circles": ["Artist Circle", " Alternative Circle"],
+      "Url": "https://uri-sample.test",
+      "Tags": ["tag1", "tag2", "tag3"]
+    },
+    "Subsection": "Subsection 1",
+    "Language": "Language",
+    "Name": "Doujin 2",
+    "Url": "https://uri-sample.test"
+  },
+  {
+    "Author": {
+      "Names": ["Artist Name 1", " Alternative Name "],
+      "Circles": ["Artist Circle", " Alternative Circle"],
+      "Url": "https://uri-sample.test",
+      "Tags": ["tag1", "tag2", "tag3"]
+    },
+    "Subsection": "Subsection 2",
+    "Language": "Language",
+    "Name": "Doujin 1",
+    "Url": "https://uri-sample.test",
     "IsDownloaded": true
-  }, {
-    "Artist": "Artist Name",
-    "Name": "Doujin name",
-    "IsDownloaded": true
-  }]
-}
+  },
+  {
+    "Author": {
+      "Names": ["Artist Name 1", " Alternative Name "],
+      "Circles": ["Artist Circle", " Alternative Circle"],
+      "Url": "https://uri-sample.test",
+      "Tags": ["tag1", "tag2", "tag3"]
+    },
+    "Subsection": "Subsection 2",
+    "Language": "Language",
+    "Name": "Doujin 2",
+    "Url": "https://uri-sample.test"
+  },
+  {
+    "Author": { "Names": ["Artist Name 2"], "Tags": ["tag1", "tag2", "tag3"] },
+    "Name": "Doujin 1",
+    "Tags": ["tag1", "tag2", "tag3"]
+  },
+  {
+    "Author": { "Names": ["Artist Name 2"], "Tags": ["tag1", "tag2", "tag3"] },
+    "Name": "Doujin 2"
+  }
+]

@@ -1,8 +1,8 @@
 # DoujinDownloader
 
-Simple app on **.NET 6.0** to create and support your local doujins repo.
+Simple app on **.NET 6.0** to create and support your local doujins repo. Auto downloading through [gallery-dl](https://github.com/mikf/gallery-dl) is planned for 2.1 release.
 
-Now only creates file with `uri` list, that you can use with, for example, [HitomiDownloader](https://github.com/KurtBestor/Hitomi-Downloader-issues).
+Now only creates file with `url` list, that you can use with, for example, [gallery-dl](https://github.com/mikf/gallery-dl) or [HitomiDownloader](https://github.com/KurtBestor/Hitomi-Downloader-issues).
 
 ![Icon](DoujinDownloader/Resources/icon.png)
 
@@ -40,36 +40,36 @@ You can also build docker image by yourself by running `publish-local-docker.ps1
 
 | Short name | Long name |                Description                | Required? |
 | :--------: | :-------: | :---------------------------------------: | :-------: |
-|     -i     |  --input  |        Input file (`.md`/`.json`)         |    Yes    |
+|     -i     |  --input  |        Input file (`.md`/`.json`)         |    No     |
 |     -j     |  --json   | Path to converted from `.md` `.json` file |    No     |
-|     -u     |  --uris   |       Path to ready `uris.txt` file       |    No     |
+|     -u     |  --urls   |       Path to ready `urls.txt` file       |    No     |
 |            | --version |              Current version              |           |
 |            |  --help   |    Message about command line options     |           |
 
-`-i/--input` is a `string` with path to `.md` or `.json` file with doujins list.
+`-i/--input` is a `string` with path to `.md` or `.json` file with doujins list. If not set -- tries to take `doujins.md` in your running directory.
 
-`-j/--json` is a `string` with path to converted `.json` file with doujins list. If not set – created near `.exe`.
+`-j/--json` is a `string` with path to converted `.json` file with doujins list. If not set -– created near `.exe`.
 
-`-u/--uris` is a `string` with path to ready `.txt` file with doujins uris. If not set – created near `.exe`.
+`-u/--urls` is a `string` with path to ready `.txt` file with doujins urls. If not set -– created near `.exe`.
 
-Simple example looks like this: `DoujinDownloader -i Doujins.md -j Doujins.json -a ArtistName -u Uris.txt`.
+Simple example looks like this: `DoujinDownloader -i doujins.md -j doujins.json -u uris.txt`.
 
 ## How to use md
 
 ```text
-## [Author name 'Circle'](uri) //Circle optional
-### Subsection //tankoubon, etc -- optional
-- [ ] [Doujin name](uri), Language //Not Downloaded
+## [Artist Name 1, Alternative Name 'Artist Circle, Alternative Circle'](https://uri-sample.test); tag1, tag2, tag3 // Circle, url, tags optional
+### Subsection // tankoubon, etc -- optional
+- [ ] [Doujin name](uri), Language; tag1, tag2 //Not Downloaded
 - [x] [Doujin name]() //Downloaded
 ```
 
 Uri, language and subsection are optional and can be null.
 
-[Example of `.md` file](https://github.com/Gigas002/DoujinDownloader/blob/master/Doujins.md)
+[Example of `.md` file](Doujins.md)
 
 ## How to use json
 
-[Example of `.json` file](https://github.com/Gigas002/DoujinDownloader/blob/master/Doujins.json)
+[Example of `.json` file](Doujins.json)
 
 ## Localization
 

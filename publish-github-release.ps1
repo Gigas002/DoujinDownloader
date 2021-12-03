@@ -38,7 +38,7 @@ Write-Output "Copying docs, LICENSE.md, etc to published directories"
 # win-x64
 if ($IsWindows -or $buildAll)
 {
-    Copy-Item -Path "DoujinDownloader/README.pdf" -Destination "Publish/win-x64/README.pdf"
+    Copy-Item -Path "README.md" -Destination "Publish/win-x64/README.pdf"
     Copy-Item -Path "LICENSE.md" -Destination "Publish/win-x64/LICENSE.md"
     Copy-Item -Path "CHANGELOG.md" -Destination "Publish/win-x64/CHANGELOG.md"    
 }
@@ -46,7 +46,7 @@ if ($IsWindows -or $buildAll)
 # linux-x64
 if ($IsLinux -or $buildAll)
 {
-    Copy-Item -Path "DoujinDownloader/README.pdf" -Destination "Publish/linux-x64/README.pdf"
+    Copy-Item -Path "README.md" -Destination "Publish/linux-x64/README.pdf"
     Copy-Item -Path "LICENSE.md" -Destination "Publish/linux-x64/LICENSE.md"
     Copy-Item -Path "CHANGELOG.md" -Destination "Publish/linux-x64/CHANGELOG.md"    
 }
@@ -54,7 +54,7 @@ if ($IsLinux -or $buildAll)
 # osx-x64
 if ($IsMacOS -or $buildAll)
 {
-    Copy-Item -Path "DoujinDownloader/README.pdf" -Destination "Publish/osx-x64/README.pdf"
+    Copy-Item -Path "README.md" -Destination "Publish/osx-x64/README.pdf"
     Copy-Item -Path "LICENSE.md" -Destination "Publish/osx-x64/LICENSE.md"
     Copy-Item -Path "CHANGELOG.md" -Destination "Publish/osx-x64/CHANGELOG.md"
 }

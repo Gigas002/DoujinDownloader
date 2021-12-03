@@ -2,7 +2,14 @@
 
 ## ?? -- Release 2.0.0
 
+**Breaking:** below changes compatible with `.md` input, but incompatible with `.json`.
+
 - Upgrade to **.NET 6.0.100**;
+- Added ability to select multiple author names;
+- Added ability to select multiple author circles;
+- Added ability to write tags to both authors and doujins;
+- Fixed CI and docker builds;
+- Changed output `urls.txt` to be compatible with `gallery-dl` script;
 
 ## 03.12.2020 -- Release 1.1.0
 
