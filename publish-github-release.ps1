@@ -6,7 +6,7 @@ Write-Output "Started building/publishing"
 if ($IsWindows -or $buildAll)
 {
     Write-Output "Start Win-x64 publish"
-    dotnet publish "DoujinDownloader/DoujinDownloader.csproj" -c Release -r win-x64 /p:PublishDir=../Publish/win-x64 /p:IncludeAllContentForSelfExtract=true /p:PublishSingleFile=true /p:PublishTrimmed=true
+    dotnet publish "DoujinDownloader/DoujinDownloader.csproj" -c Release -r win-x64 --self-contained true /p:PublishDir=../Publish/win-x64 /p:IncludeAllContentForSelfExtract=true /p:PublishSingleFile=true /p:PublishTrimmed=true
     Write-Output "Ended Win-x64 publish"
 }
 
