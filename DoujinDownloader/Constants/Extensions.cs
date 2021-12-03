@@ -1,28 +1,27 @@
-﻿namespace DoujinDownloader.Constants
+﻿namespace DoujinDownloader.Constants;
+
+/// <summary>
+/// Some FileInfo.Extensions
+/// </summary>
+internal static class Extensions
 {
     /// <summary>
-    /// Some FileInfo.Extensions
+    /// .json
     /// </summary>
-    internal static class Extensions
-    {
-        /// <summary>
-        /// .json
-        /// </summary>
-        internal const string JsonExtension = ".json";
+    internal const string JsonExtension = ".json";
 
-        /// <summary>
-        /// .md
-        /// </summary>
-        internal const string MarkdownExtension = ".md";
+    /// <summary>
+    /// .md
+    /// </summary>
+    internal const string MarkdownExtension = ".md";
 
-        /// <summary>
-        /// .txt
-        /// </summary>
-        internal const string TxtExtension = ".txt";
+    /// <summary>
+    /// .txt
+    /// </summary>
+    internal const string TxtExtension = ".txt";
 
-        /// <summary>
-        /// .html
-        /// </summary>
-        internal const string HtmlExtension = ".html";
-    }
+    /// <summary>
+    /// .html
+    /// </summary>
+    internal const string HtmlExtension = ".html";
 }

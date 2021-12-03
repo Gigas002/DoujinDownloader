@@ -2,37 +2,36 @@
 
 // ReSharper disable All
 
-namespace DoujinDownloader
+namespace DoujinDownloader;
+
+/// <summary>
+/// Class for parsing console arguments.
+/// </summary>
+public class Arguments
 {
+    #region Required
+
     /// <summary>
-    /// Class for parsing console arguments.
+    /// Full path to input file.
     /// </summary>
-    public class Arguments
-    {
-        #region Required
+    [Option('i', "input", Required = true, HelpText = "Full path to input file.")]
+    public string InputFilePath { get; set; }
 
-        /// <summary>
-        /// Full path to input file.
-        /// </summary>
-        [Option('i', "input", Required = true, HelpText = "Full path to input file.")]
-        public string InputFilePath { get; set; }
+    #endregion
 
-        #endregion
+    #region Optional
 
-        #region Optional
+    /// <summary>
+    /// Path to converted json.
+    /// </summary>
+    [Option('j', "json", Required = false, HelpText = "Path to converted json.")]
+    public string JsonPath { get; set; } = "Doujins.json";
 
-        /// <summary>
-        /// Path to converted json.
-        /// </summary>
-        [Option('j', "json", Required = false, HelpText = "Path to converted json.")]
-        public string JsonPath { get; set; } = "Doujins.json";
+    /// <summary>
+    /// Path to .txt file with raw uris, to use in HitomiDownloader.
+    /// </summary>
+    [Option('u', "uris", Required = false, HelpText = "Path to .txt file with raw uris, to use in HitomiDownloader.")]
+    public string UrisPath { get; set; } = "Uris.txt";
 
-        /// <summary>
-        /// Path to .txt file with raw uris, to use in HitomiDownloader.
-        /// </summary>
-        [Option('u', "uris", Required = false, HelpText = "Path to .txt file with raw uris, to use in HitomiDownloader.")]
-        public string UrisPath { get; set; } = "Uris.txt";
-
-        #endregion
-    }
+    #endregion
 }
