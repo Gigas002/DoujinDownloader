@@ -43,7 +43,7 @@ namespace DoujinDownloader
             Stopwatch stopwatch = new Stopwatch();
 
             //Get command line args
-            Parser.Default.ParseArguments<Options>(args).WithParsed(ParseConsoleOptions)
+            Parser.Default.ParseArguments<Arguments>(args).WithParsed(ParseConsoleOptions)
                   .WithNotParsed(error => IsParsingErrors = true);
 
             //Stop executing if errors occured
@@ -74,7 +74,7 @@ namespace DoujinDownloader
         /// Set properties values from command line options
         /// </summary>
         /// <param name="options">Command line options</param>
-        private static void ParseConsoleOptions(Options options)
+        private static void ParseConsoleOptions(Arguments options)
         {
             //Check if string options are empty strings.
             if (string.IsNullOrWhiteSpace(options.InputFilePath))
