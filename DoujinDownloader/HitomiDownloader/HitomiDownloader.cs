@@ -106,7 +106,9 @@ internal static class HitomiDownloader
     /// <returns></returns>
     private static async ValueTask DownloadImage(ImageInfo imageInfo)
     {
+        #pragma warning disable SYSLIB0014
         HttpWebRequest httpWebRequest = WebRequest.CreateHttp(imageInfo.ImageUri);
+        #pragma warning restore SYSLIB0014
         httpWebRequest.Method = Downloaders.Get;
         httpWebRequest.Headers.Add(HttpRequestHeader.Referer, Downloaders.HitomiLa);
 
